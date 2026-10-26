@@ -1,95 +1,15 @@
 'use client';
 
-<<<<<<< HEAD
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-=======
-import React, { useRef } from 'react';
-import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 import {
   Sprout, Leaf, Phone, Mail,
   Award, Heart, TreePine
 } from 'lucide-react';
-<<<<<<< HEAD
 import { Reveal } from '@/components/ui/Reveal';
 import { TEAM } from '@/data/team';
 
-=======
-
-/* ─── Reveal helper ─────────────────────────────────────────────────── */
-function Reveal({
-  children,
-  delay = 0,
-  className,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-60px 0px' });
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-/* ─── Team Data ─────────────────────────────────────────────────────── */
-const TEAM = [
-  {
-    id: 'sureshbhai',
-    name: 'Patel Sureshbhai',
-    role: 'Founder & Head Farmer',
-    tagline: '"The soil is not just dirt — it is alive, it breathes, it remembers."',
-    bio: 'With over 50 years of hands-on farming, Sureshbhai is the living encyclopedia of Kamana\'s organic practices. He began refusing chemical inputs in 1972 — before "organic" was even a word in Gujarat. Today, his Vedic composting methods and deep knowledge of crop cycles are the backbone of Pure Khetar\'s quality.',
-    since: '1972',
-    role_detail: 'Soil Science & Vedic Farming',
-    specialties: ['Vedic Composting', 'Crop Rotation', 'Gir Cow Management', 'Soil Biology'],
-    image: null, // no photo available yet
-    accent: 'from-forest to-forest-l',
-    iconBg: 'bg-forest/10',
-    badgeColor: 'bg-marigold text-forest',
-  },
-  {
-    id: 'het',
-    name: 'Het Patel',
-    role: 'Farm Operations & Innovation',
-    tagline: '"Technology should amplify nature, never replace it."',
-    bio: 'Het brings modern agricultural science to the farm\'s ancient roots. He designed the 12,000 sq ft net-house structure in 2008 and introduced precision drip irrigation — cutting water use by 60%. His background in agricultural engineering has transformed Kamana from a local farm into a model of sustainable scalability.',
-    since: '2008',
-    role_detail: 'Agricultural Engineering & Operations',
-    specialties: ['Net-House Design', 'Drip Irrigation', 'Water Harvesting', 'Precision Agriculture'],
-    image: null,
-    accent: 'from-sage to-forest',
-    iconBg: 'bg-sage/10',
-    badgeColor: 'bg-sage/20 text-forest',
-  },
-  {
-    id: 'ansh',
-    name: 'Ansh R.',
-    role: 'Brand, Tech & Transparency',
-    tagline: '"Every farmer deserves fair prices. Every consumer deserves honest food."',
-    bio: 'Ansh built Pure Khetar from the ground up — the brand, the website, the lab testing program, and the direct-to-consumer supply chain. His vision: eliminate middlemen, maximize freshness, and give Kamana\'s farmers the recognition and income they deserve. He handles everything from packaging design to customer WhatsApp.',
-    since: '2023',
-    role_detail: 'Brand Design & Customer Experience',
-    specialties: ['Brand Strategy', 'Lab Testing Program', 'Direct-to-Consumer', 'Technology'],
-    image: null,
-    accent: 'from-terracotta to-marigold',
-    iconBg: 'bg-terracotta/10',
-    badgeColor: 'bg-terracotta/15 text-terracotta',
-  },
-];
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 
 /* ─── Values ────────────────────────────────────────────────────────── */
 const VALUES = [
@@ -122,11 +42,7 @@ const VALUES = [
 /* ─── Page ──────────────────────────────────────────────────────────── */
 export default function TeamPage() {
   return (
-<<<<<<< HEAD
     <div className="bg-cream overflow-x-hidden">
-=======
-    <main className="bg-cream overflow-x-hidden">
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 
       {/* ══ HERO ══════════════════════════════════════════════════════ */}
       <section className="relative bg-forest overflow-hidden">
@@ -198,17 +114,11 @@ export default function TeamPage() {
                             {member.name.split(' ').map(n => n[0]).join('')}
                           </span>
                           {/* Year badge */}
-<<<<<<< HEAD
                           {member.since && (
                             <div className="absolute top-4 left-4 glass border border-white/25 text-white px-3 py-1.5 rounded-full text-xs font-bold">
                               Since {member.since}
                             </div>
                           )}
-=======
-                          <div className="absolute top-4 left-4 glass border border-white/25 text-white px-3 py-1.5 rounded-full text-xs font-bold">
-                            Since {member.since}
-                          </div>
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
                           {/* Leaf decor */}
                           <Leaf className="absolute bottom-4 right-4 w-12 h-12 text-white/20" />
                         </div>
@@ -255,11 +165,7 @@ export default function TeamPage() {
                         href="https://wa.me/919876543210"
                         target="_blank"
                         rel="noopener noreferrer"
-<<<<<<< HEAD
                         className="flex items-center gap-1.5 text-xs font-semibold text-whatsapp-dk bg-whatsapp/10 border border-whatsapp/30 px-4 py-2.5 rounded-full hover:bg-whatsapp/20 transition-colors"
-=======
-                        className="flex items-center gap-1.5 text-xs font-semibold text-[#128C4A] bg-[#25D366]/10 border border-[#25D366]/30 px-4 py-2.5 rounded-full hover:bg-[#25D366]/20 transition-colors"
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
                       >
                         <Phone className="w-3.5 h-3.5" />
                         WhatsApp
@@ -344,10 +250,6 @@ export default function TeamPage() {
           </Reveal>
         </div>
       </section>
-<<<<<<< HEAD
     </div>
-=======
-    </main>
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
   );
 }

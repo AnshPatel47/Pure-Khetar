@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { NextResponse, type NextRequest } from 'next/server';
 import { parseProductQuery } from '@/lib/validations/product.schema';
 import { getProducts, searchProducts } from '@/services/product.service';
@@ -18,15 +17,3 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Could not load products.' }, { status: 500 });
   }
 }
-=======
-import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-
-export async function GET() {
-  const products = await prisma.product.findMany({
-    orderBy: { createdAt: 'desc' },
-  });
-
-  return NextResponse.json(products);
-}
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb

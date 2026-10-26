@@ -13,31 +13,19 @@
     "db:studio": "prisma studio"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@prisma/client": "6.19.3",
     "@tanstack/react-query": "^5.104.2",
     "bcryptjs": "^3.0.3",
-=======
-    "@prisma/client": "^6.19.3",
-    "@tanstack/react-query": "^5.104.2",
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
     "clsx": "^2.1.1",
     "framer-motion": "^14.2.0",
     "lucide-react": "^1.56.0",
     "next": "14.2.35",
-<<<<<<< HEAD
     "next-auth": "5.0.0-beta.32",
     "prisma": "6.19.3",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.6.0",
     "zod": "^3.25.76",
-=======
-    "prisma": "^6.19.3",
-    "react": "^18",
-    "react-dom": "^18",
-    "tailwind-merge": "^3.7.0",
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
     "zustand": "^5.0.15"
   },
   "devDependencies": {
@@ -48,7 +36,6 @@
     "eslint-config-next": "14.2.35",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-<<<<<<< HEAD
     "tsx": "^4.23.15",
     "typescript": "^5"
   },
@@ -63,8 +50,5 @@
     "@prisma/engines@6.19.3": true,
     "esbuild@0.28.2": true,
     "prisma@6.19.3": true
-=======
-    "typescript": "^5"
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
   }
 }

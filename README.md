@@ -61,12 +61,5 @@ src/
 
 ## Deploying (Vercel)
 
-<<<<<<< HEAD
 Add `DATABASE_URL`, `DIRECT_URL`, `AUTH_SECRET`, `NEXT_PUBLIC_SITE_URL` as environment variables.
 Use a **different** `AUTH_SECRET` than your laptop. Build command is already `prisma generate && next build`.
-=======
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# Pure-Khetar
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb

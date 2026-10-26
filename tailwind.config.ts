@@ -17,11 +17,8 @@ const config: Config = {
         marigold:   "#E0A528",
         terracotta: "#C86D3B",
         sage:       "#7A9A6B",
-<<<<<<< HEAD
         whatsapp:      "#25D366",
         "whatsapp-dk": "#128C4A",
-=======
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
       },
       fontFamily: {
         serif: ["var(--font-fraunces)", "Fraunces", "Georgia", "serif"],
@@ -48,10 +45,7 @@ const config: Config = {
         "5xl": "2.5rem",
       },
       transitionDuration: {
-<<<<<<< HEAD
         "350": "350ms",
-=======
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
         "400": "400ms",
       },
       keyframes: {
@@ -67,12 +61,9 @@ const config: Config = {
           "0%":   { transform: "scale(1.08)" },
           "100%": { transform: "scale(1)" },
         },
-<<<<<<< HEAD
         "shimmer-slide": {
           "100%": { transform: "translateX(100%)" },
         },
-=======
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
         "float": {
           "0%, 100%": { transform: "translateY(0)" },
           "50%":      { transform: "translateY(-12px)" },

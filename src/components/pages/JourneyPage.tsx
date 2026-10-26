@@ -1,50 +1,15 @@
 'use client';
 
-<<<<<<< HEAD
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-=======
-import React, { useRef } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 import {
   Sprout, Droplets, Leaf, Award, ArrowRight,
   TreePine, FlaskConical
 } from 'lucide-react';
-<<<<<<< HEAD
 import { Reveal } from '@/components/ui/Reveal';
 
-=======
-
-/* ─── Reveal helper ─────────────────────────────────────────────────── */
-function Reveal({
-  children,
-  delay = 0,
-  className,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-70px 0px' });
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 28 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as const }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 
 /* ─── Timeline Data ─────────────────────────────────────────────────── */
 const TIMELINE = [
@@ -126,11 +91,7 @@ const MILESTONES = [
 /* ─── Page ──────────────────────────────────────────────────────────── */
 export default function JourneyPage() {
   return (
-<<<<<<< HEAD
     <div className="bg-cream overflow-x-hidden">
-=======
-    <main className="bg-cream overflow-x-hidden">
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 
       {/* ══ HERO ══════════════════════════════════════════════════════ */}
       <section className="relative w-full min-h-[70vh] flex items-end overflow-hidden bg-forest">
@@ -348,10 +309,6 @@ export default function JourneyPage() {
           </Reveal>
         </div>
       </section>
-<<<<<<< HEAD
     </div>
-=======
-    </main>
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
   );
 }

@@ -1,20 +1,12 @@
 datasource db {
-<<<<<<< HEAD
   provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
-=======
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 }
 
 generator client {
   provider = "prisma-client-js"
-<<<<<<< HEAD
   binaryTargets = ["native", "rhel-openssl-3.0.x"]
-=======
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 }
 
 enum Role {
@@ -22,14 +14,11 @@ enum Role {
   ADMIN
 }
 
-<<<<<<< HEAD
 enum PaymentMethod {
   COD
   UPI
 }
 
-=======
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 enum OrderStatus {
   PENDING
   PROCESSING
@@ -78,12 +67,9 @@ model Product {
   orderItems  OrderItem[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
-<<<<<<< HEAD
 
   @@index([categoryId])
   @@index([isFeatured])
-=======
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 }
 
 model Cart {
@@ -96,28 +82,18 @@ model Cart {
 }
 
 model CartItem {
-<<<<<<< HEAD
   id        String  @id @default(cuid())
   cartId    String
   cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
   productId String
   product   Product @relation(fields: [productId], references: [id])
   quantity  Int     @default(1)
-=======
-  id        String   @id @default(cuid())
-  cartId    String
-  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
-  productId String
-  product   Product  @relation(fields: [productId], references: [id])
-  quantity  Int      @default(1)
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 }
 
 model Order {
   id          String      @id @default(cuid())
   userId      String
   user        User        @relation(fields: [userId], references: [id])
-<<<<<<< HEAD
   subtotal    Float       @default(0)
   deliveryFee Float       @default(0)
   totalAmount Float
@@ -143,20 +119,3 @@ model OrderItem {
   quantity  Int
   price     Float
 }
-=======
-  totalAmount Float
-  status      OrderStatus @default(PENDING)
-  items       OrderItem[]
-  createdAt   DateTime    @default(now())
-}
-
-model OrderItem {
-  id        String   @id @default(cuid())
-  orderId   String
-  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  productId String
-  product   Product  @relation(fields: [productId], references: [id])
-  quantity  Int
-  price     Float
-}
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb

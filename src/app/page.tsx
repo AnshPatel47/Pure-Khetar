@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Suspense } from 'react';
 import { CategorySection } from '@/components/home/CategorySection';
 import { FeaturedProducts, FeaturedProductsSkeleton } from '@/components/home/FeaturedProducts';
@@ -38,22 +37,6 @@ export default function HomePage() {
       <LazyFarmReels />
       <LazyWeeklyBasket />
       <LazyBlogPreview />
-=======
-import { HeroSection } from '@/components/home/HeroSection';
-import { FeaturedHarvestSection } from '@/components/home/FeaturedHarvestSection';
-import { JourneySection } from '@/components/home/JourneySection';
-import { QualitySection } from '@/components/home/QualitySection';
-import { TrustStrip } from '@/components/home/TrustStrip';
-
-export default function HomePage() {
-  return (
-    <div className="overflow-x-hidden">
-      <HeroSection />
-      <TrustStrip />
-      <FeaturedHarvestSection />
-      <QualitySection />
-      <JourneySection />
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
     </div>
   );
 }

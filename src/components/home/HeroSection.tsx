@@ -3,12 +3,8 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-<<<<<<< HEAD
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { BLUR_DATA_URL } from '@/lib/constants';
-=======
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 import { ArrowRight, ShieldCheck, Truck, Sprout, Leaf, Star, Clock } from 'lucide-react';
 
 /* ─── Stagger helpers ──────────────────────────────────────────────── */
@@ -61,10 +57,6 @@ export function HeroSection() {
   /* Parallax transforms */
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
   const textY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
-<<<<<<< HEAD
-=======
-  const smoothBgY = useSpring(bgY, { stiffness: 60, damping: 20 });
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 
   return (
     <section
@@ -73,22 +65,13 @@ export function HeroSection() {
     >
       {/* ── Background Farm Image with Parallax ── */}
       <motion.div
-<<<<<<< HEAD
         style={{ y: bgY }}
         className="absolute inset-0 z-0 scale-105 will-change-transform"
-=======
-        style={{ y: smoothBgY }}
-        className="absolute inset-0 z-0 scale-105"
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
       >
         <motion.div
           initial={{ scale: 1.12 }}
           animate={{ scale: 1 }}
-<<<<<<< HEAD
           transition={{ duration: 8, ease: 'easeOut' }}
-=======
-          transition={{ duration: 12, ease: 'easeOut' }}
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
           className="absolute inset-0"
         >
           <Image
@@ -96,14 +79,10 @@ export function HeroSection() {
             alt="Pure Khetar Net-House Organic Farm, Kamana Gujarat"
             fill
             priority
-<<<<<<< HEAD
             quality={80}
             sizes="100vw"
             placeholder="blur"
             blurDataURL={BLUR_DATA_URL}
-=======
-            sizes="100vw"
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
             className="object-cover object-center"
           />
         </motion.div>

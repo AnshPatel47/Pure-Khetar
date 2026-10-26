@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 import React from 'react';
 import Link from 'next/link';
@@ -11,24 +10,6 @@ const FOOTER_LINKS = {
     { label: 'Fresh Vegetables', href: '/shop?category=vegetables' },
     { label: 'Fruiting Veggies', href: '/shop?category=fruiting' },
     { label: 'Weekly Baskets', href: '/weekly-baskets' },
-=======
-'use client';
-
-import React from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import {
-  Leaf, MapPin, Phone, Mail, Camera,
-  AtSign, Video, ArrowRight, Sprout
-} from 'lucide-react';
-
-const FOOTER_LINKS = {
-  Shop: [
-    { label: 'Fresh Vegetables', href: '/shop?category=vegetables' },
-    { label: 'Weekly Baskets', href: '/weekly-baskets' },
-    { label: 'Leafy Greens', href: '/shop?category=leafy' },
-    { label: 'Roots & Gourds', href: '/shop?category=roots' },
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
   ],
   'Our Farm': [
     { label: 'Net-House Farming', href: '/our-farm#nethouse' },
@@ -40,11 +21,7 @@ const FOOTER_LINKS = {
     { label: 'Meet the Team', href: '/team' },
     { label: 'Blog & Recipes', href: '/blog' },
     { label: 'Contact Us', href: '/contact' },
-<<<<<<< HEAD
     { label: 'My Account', href: '/account' },
-=======
-    { label: 'About Pure Khetar', href: '/about' },
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
   ],
 };
 
@@ -103,7 +80,6 @@ export function Footer() {
             </p>
 
             {/* Contact */}
-<<<<<<< HEAD
             <address className="space-y-2.5 not-italic">
               <p className="flex items-start gap-2.5 text-xs text-cream/60">
                 <MapPin className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" aria-hidden />
@@ -124,50 +100,6 @@ export function Footer() {
                 {CONTACT.email}
               </a>
             </address>
-=======
-            <div className="space-y-2.5">
-              <a
-                href="https://maps.google.com"
-                className="flex items-start gap-2.5 text-xs text-cream/60 hover:text-marigold transition-colors"
-              >
-                <MapPin className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
-                Kamana Village, Gujarat, India — 388001
-              </a>
-              <a
-                href="https://wa.me/919876543210"
-                className="flex items-center gap-2.5 text-xs text-cream/60 hover:text-marigold transition-colors"
-              >
-                <Phone className="w-3.5 h-3.5" />
-                +91 98765 43210 (WhatsApp)
-              </a>
-              <a
-                href="mailto:hello@purekhetar.com"
-                className="flex items-center gap-2.5 text-xs text-cream/60 hover:text-marigold transition-colors"
-              >
-                <Mail className="w-3.5 h-3.5" />
-                hello@purekhetar.com
-              </a>
-            </div>
-
-            {/* Social */}
-            <div className="flex items-center gap-2.5 mt-6">
-              {[
-                { icon: <Camera className="w-4 h-4" />, href: '#', label: 'Instagram' },
-                { icon: <AtSign className="w-4 h-4" />, href: '#', label: 'Facebook' },
-                { icon: <Video className="w-4 h-4" />, href: '#', label: 'YouTube' },
-              ].map(({ icon, href, label }) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className="w-8 h-8 rounded-full bg-white/8 border border-white/10 flex items-center justify-center text-cream/60 hover:text-marigold hover:bg-marigold/10 hover:border-marigold/30 transition-colors"
-                >
-                  {icon}
-                </motion.a>
-              ))}
-            </div>
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
           </div>
 
           {/* Nav columns */}
@@ -194,11 +126,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="relative z-10 border-t border-white/8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/40">
-<<<<<<< HEAD
           <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved. Kamana Farm, Gujarat.</p>
-=======
-          <p>© {new Date().getFullYear()} Pure Khetar. All rights reserved. Kamana Farm, Gujarat.</p>
->>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
           <div className="flex items-center gap-4">
             <Link href="/privacy" className="hover:text-cream/70 transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-cream/70 transition-colors">Terms</Link>
