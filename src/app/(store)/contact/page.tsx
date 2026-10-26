@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import type { Metadata } from 'next';
 import { ContactPage } from '@/components/pages/ContactPage';
 
@@ -9,3 +10,15 @@ export const metadata: Metadata = {
 export default function Page() {
   return <ContactPage />;
 }
+=======
+import { ComingSoonPage } from '@/components/pages/ComingSoonPage';
+
+export default function Page() {
+  return (
+    <ComingSoonPage
+      title="Contact the Farm"
+      description="Our contact page is being prepared. You can still explore and order today's harvest."
+    />
+  );
+}
+>>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb

@@ -3,14 +3,46 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+<<<<<<< HEAD
 import { motion, useScroll, useTransform } from 'framer-motion';
+=======
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+>>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 import {
   Sprout, ShieldCheck, Droplets, Sun, Wind, Award,
   Leaf, ArrowRight, PlayCircle, FlaskConical, TreePine
 } from 'lucide-react';
+<<<<<<< HEAD
 import { Reveal } from '@/components/ui/Reveal';
 import { FarmGallery } from '@/components/home/FarmGallery';
 
+=======
+
+/* ─── Reveal wrapper ────────────────────────────────────────────────── */
+function Reveal({
+  children,
+  delay = 0,
+  className,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-80px 0px' });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as const }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+>>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 
 /* ─── Section Heading ────────────────────────────────────────────────── */
 function SectionHeading({
@@ -100,7 +132,11 @@ export default function OurFarmPage() {
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
 
   return (
+<<<<<<< HEAD
     <div className="bg-cream overflow-x-hidden">
+=======
+    <main className="bg-cream overflow-x-hidden">
+>>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 
       {/* ══ HERO ══════════════════════════════════════════════════════ */}
       <section
@@ -413,10 +449,14 @@ export default function OurFarmPage() {
           </Reveal>
         </div>
       </section>
+<<<<<<< HEAD
 
       {/* ══ FULL FARM GALLERY ══════════════════════════════════════════════ */}
       <FarmGallery />
 
     </div>
+=======
+    </main>
+>>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
   );
 }

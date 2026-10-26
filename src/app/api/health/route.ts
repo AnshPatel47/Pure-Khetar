@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+<<<<<<< HEAD
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
@@ -12,3 +13,9 @@ export async function GET() {
     return NextResponse.json({ status: 'degraded', database: 'down' }, { status: 503 });
   }
 }
+=======
+
+export function GET() {
+  return NextResponse.json({ status: 'ok' });
+}
+>>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb

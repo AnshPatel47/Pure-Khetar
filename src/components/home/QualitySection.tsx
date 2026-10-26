@@ -1,5 +1,6 @@
 'use client';
 
+<<<<<<< HEAD
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,6 +8,29 @@ import { motion } from 'framer-motion';
 import { FlaskConical, Leaf, Award, Wind, ArrowRight, Sprout, ShieldCheck } from 'lucide-react';
 import { Reveal } from '@/components/ui/Reveal';
 
+=======
+import React, { useRef } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion, useInView } from 'framer-motion';
+import { FlaskConical, Leaf, Award, Wind, ArrowRight, Sprout, ShieldCheck } from 'lucide-react';
+
+function Reveal({ children, delay = 0, className }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-60px 0px' });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 28 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as const }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+>>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
 
 const QUALITY_POINTS = [
   {

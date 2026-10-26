@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ArrowLeft } from 'lucide-react';
@@ -48,3 +49,15 @@ export default function BlogPostPage({ params }: PostPageProps) {
     </Container>
   );
 }
+=======
+import { ComingSoonPage } from '@/components/pages/ComingSoonPage';
+
+export default function Page() {
+  return (
+    <ComingSoonPage
+      title="Farm Journal"
+      description="This story is being prepared. Browse the current harvest while you wait."
+    />
+  );
+}
+>>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb

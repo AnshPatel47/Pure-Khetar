@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
@@ -125,3 +126,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
     </Container>
   );
 }
+=======
+import { ComingSoonPage } from '@/components/pages/ComingSoonPage';
+
+export default function Page() {
+  return (
+    <ComingSoonPage
+      title="Product details"
+      description="This product page is being prepared. Visit the shop to browse the available harvest."
+    />
+  );
+}
+>>>>>>> 92b162cf2f90d0b1754d9132ba0a059cf0292deb
