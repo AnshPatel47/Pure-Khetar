@@ -7,34 +7,42 @@ import { AddToCartButton } from '@/components/products/AddToCartButton';
 const FALLBACK_PRODUCTS = [
   {
     id: 'f1',
+    slug: 'f1',
     name: 'Organic Ringan (Baby Eggplant)',
     description: 'Tender baby eggplants grown in net-house, nourished with A2 Vedic manure. Zero pesticides.',
     price: 60,
     unit: 'kg',
+    stock: 0,
     images: ['/images/products/ringan.jpeg'],
   },
   {
     id: 'f2',
+    slug: 'f2',
     name: 'Organic Fulawar (Cauliflower)',
     description: 'Crisp, white cauliflower heads straight from Kamana net-house plots. Harvested at sunrise.',
     price: 80,
     unit: 'kg',
+    stock: 0,
     images: ['/images/products/fulawar.jpeg'],
   },
   {
     id: 'f3',
+    slug: 'f3',
     name: 'Farm Fresh Baby Eggplant',
     description: 'Plump, glossy baby eggplants. Perfect for Gujarati curries. Delivered same morning.',
     price: 55,
     unit: 'kg',
+    stock: 0,
     images: ['/images/products/baby-eggplant.jpeg'],
   },
   {
     id: 'f4',
+    slug: 'f4',
     name: 'Weekly Organic Basket',
     description: 'Curated mix of this week\'s freshest harvest from Kamana. Surprise selection, always organic.',
     price: 299,
     unit: 'basket',
+    stock: 0,
     images: ['/images/products/fulawar.jpeg'],
   },
 ];
@@ -84,7 +92,7 @@ export async function FeaturedHarvestSection() {
           >
             {/* Product image */}
             <Link
-              href={`/products/${('slug' in product) ? (product as { slug: string }).slug : product.id}`}
+              href={`/products/${product.slug}`}
               className="relative block h-56 w-full overflow-hidden bg-cream"
             >
               <Image
@@ -101,7 +109,7 @@ export async function FeaturedHarvestSection() {
 
             {/* Content */}
             <div className="p-5 flex flex-col flex-1">
-              <Link href={`/products/${('slug' in product) ? (product as { slug: string }).slug : product.id}`}>
+              <Link href={`/products/${product.slug}`}>
                 <h3 className="font-serif text-base font-bold text-forest group-hover:text-terracotta transition-colors line-clamp-1">
                   {product.name}
                 </h3>
@@ -119,11 +127,7 @@ export async function FeaturedHarvestSection() {
                   </p>
                 </div>
                 <AddToCartButton
-                  id={product.id}
-                  name={product.name}
-                  price={product.price}
-                  unit={product.unit}
-                  image={product.images[0] || '/images/products/ringan.jpeg'}
+                  product={product}
                   className="flex items-center gap-1.5 bg-forest text-cream text-xs font-bold px-4 py-2.5 rounded-full hover:bg-forest-l transition-colors shadow-organic group-hover:shadow-organic-lg"
                 />
               </div>

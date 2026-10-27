@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 
 interface LazyVideoProps {
   src: string;
-  poster: string;
+  poster?: string;
   label: string;
   className?: string;
 }
