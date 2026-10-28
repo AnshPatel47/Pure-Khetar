@@ -20,24 +20,12 @@ const FarmReels = dynamic(() => import('./FarmReels').then((m) => m.FarmReels), 
   ssr: false,
   loading: () => <SectionPlaceholder height="h-[560px]" />,
 });
-const WeeklyBasketSection = dynamic(() => import('./WeeklyBasketSection').then((m) => m.WeeklyBasketSection), {
-  ssr: false,
-  loading: () => <SectionPlaceholder height="h-[420px]" />,
-});
 const BlogPreview = dynamic(() => import('./BlogPreview').then((m) => m.BlogPreview), { ssr: false });
 
 export function LazyFarmReels() {
   return (
     <LazyMount placeholder={<SectionPlaceholder height="h-[560px]" />}>
       <FarmReels />
-    </LazyMount>
-  );
-}
-
-export function LazyWeeklyBasket() {
-  return (
-    <LazyMount placeholder={<SectionPlaceholder height="h-[420px]" />}>
-      <WeeklyBasketSection />
     </LazyMount>
   );
 }

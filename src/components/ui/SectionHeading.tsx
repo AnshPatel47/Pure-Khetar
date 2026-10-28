@@ -1,12 +1,15 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 interface SectionHeadingProps {
-  title: string;
+  title: ReactNode;
   description?: string;
+  subtitle?: string;
   eyebrow?: string;
   align?: 'left' | 'center';
+  center?: boolean;
   action?: { label: string; href: string };
   className?: string;
 }
@@ -14,23 +17,28 @@ interface SectionHeadingProps {
 export function SectionHeading({
   title,
   description,
+  subtitle,
   eyebrow,
   align = 'left',
+  center = false,
   action,
   className,
 }: SectionHeadingProps) {
+  const resolvedAlign = center ? 'center' : align;
   return (
     <div
       className={cn(
         'flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between',
-        align === 'center' && 'items-center text-center sm:flex-col sm:items-center',
+        resolvedAlign === 'center' && 'items-center text-center sm:flex-col sm:items-center',
         className,
       )}
     >
-      <div className={cn('max-w-2xl space-y-3', align === 'center' && 'mx-auto')}>
+      <div className={cn('max-w-2xl space-y-3', resolvedAlign === 'center' && 'mx-auto')}>
         {eyebrow && <p className="text-sm font-semibold text-terracotta">{eyebrow}</p>}
         <h2 className="font-serif text-3xl font-bold leading-tight text-forest text-balance sm:text-4xl">{title}</h2>
-        {description && <p className="text-base leading-relaxed text-forest/70">{description}</p>}
+        {(description || subtitle) && (
+          <p className="text-base leading-relaxed text-forest/70">{description || subtitle}</p>
+        )}
       </div>
 
       {action && (

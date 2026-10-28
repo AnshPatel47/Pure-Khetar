@@ -9,9 +9,9 @@ import { formatDate, formatPrice } from '@/lib/utils';
 import type { OrderStatus, OrderSummary } from '@/types/order';
 import { PageHeader } from './PageHeader';
 
-const STATUS: Record<OrderStatus, { label: string; variant: 'soft' | 'organic' | 'forest' | 'danger' }> = {
-  PENDING: { label: 'Order received', variant: 'organic' },
-  PROCESSING: { label: 'Being packed', variant: 'organic' },
+const STATUS: Record<OrderStatus, { label: string; variant: 'soft' | 'natural' | 'forest' | 'danger' }> = {
+  PENDING: { label: 'Order received', variant: 'natural' },
+  PROCESSING: { label: 'Being packed', variant: 'natural' },
   SHIPPED: { label: 'Out for delivery', variant: 'forest' },
   DELIVERED: { label: 'Delivered', variant: 'soft' },
   CANCELLED: { label: 'Cancelled', variant: 'danger' },

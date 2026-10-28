@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { SITE } from '@/lib/constants';
 
 interface LogoProps {
   /** `light` is for use on dark photos. */
@@ -44,16 +45,16 @@ export function Logo({ tone = 'dark', showTagline = false, className, size = 'md
           )}
         >
           Pure{' '}
-          <span className={light ? 'text-marigold' : 'text-terracotta'}>Khetar</span>
+          <span className={light ? 'text-marigold' : 'text-sage'}>Khetar</span>
         </span>
         {showTagline && (
           <span
             className={cn(
-              'mt-0.5 hidden text-[10px] font-medium tracking-wide sm:block',
-              light ? 'text-cream/70' : 'text-sage',
+              'mt-1 hidden text-[8px] font-bold uppercase tracking-[0.14em] sm:block',
+              light ? 'text-cream/75' : 'text-sage',
             )}
           >
-            Kamana Farm · Gujarat
+            {SITE.tagline.toUpperCase()}
           </span>
         )}
       </span>

@@ -5,7 +5,7 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
@@ -17,6 +17,13 @@ enum Role {
 enum PaymentMethod {
   COD
   UPI
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  EXPIRED
 }
 
 enum OrderStatus {
@@ -104,8 +111,9 @@ model Order {
   deliveryDate    DateTime?
   shippingAddress Json?
 
-  items     OrderItem[]
-  createdAt DateTime    @default(now())
+  items         OrderItem[]
+  paymentIntent PaymentIntent?
+  createdAt     DateTime       @default(now())
 
   @@index([userId, createdAt])
 }
@@ -118,4 +126,18 @@ model OrderItem {
   product   Product @relation(fields: [productId], references: [id])
   quantity  Int
   price     Float
+}
+
+model PaymentIntent {
+  id          String        @id @default(cuid())
+  tr          String        @unique
+  orderId     String        @unique
+  order       Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  amount      Float
+  status      PaymentStatus @default(PENDING)
+  createdAt   DateTime      @default(now())
+  expiresAt   DateTime
+  completedAt DateTime?
+
+  @@index([status, expiresAt])
 }

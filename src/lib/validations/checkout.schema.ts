@@ -10,7 +10,8 @@ export const shippingSchema = z.object({
   phone: indianPhone,
   address: z.string().trim().min(5, 'Enter your house / flat and building').max(120),
   area: z.string().trim().min(2, 'Enter your area or street').max(120),
-  city: z.string().trim().min(2, 'Select your city').max(60),
+  city: z.literal('Visnagar', { message: 'Delivery is currently available only in Visnagar' }),
+  village: z.string().trim().min(2, 'Select your village').max(80),
   pincode: z.string().trim().regex(/^[1-9]\d{5}$/, 'Enter a valid 6-digit pincode'),
   landmark: z.string().trim().max(120).optional(),
 });

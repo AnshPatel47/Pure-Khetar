@@ -7,8 +7,8 @@ type Variant = 'primary' | 'accent' | 'outline' | 'ghost' | 'whatsapp' | 'glass'
 type Size = 'sm' | 'md' | 'lg';
 
 const VARIANTS: Record<Variant, string> = {
-  primary: 'bg-forest text-cream shadow-sm hover:bg-forest-l hover:shadow-organic',
-  accent: 'bg-marigold text-forest shadow-glow-gold hover:bg-white hover:shadow-organic-lg',
+  primary: 'bg-forest text-cream shadow-sm hover:bg-forest-l hover:shadow-natural',
+  accent: 'bg-marigold text-forest shadow-glow-gold hover:bg-white hover:shadow-natural-lg',
   outline: 'border border-forest/25 bg-transparent text-forest hover:bg-forest/5',
   ghost: 'text-forest hover:bg-forest/5',
   whatsapp: 'border border-whatsapp/30 bg-whatsapp/10 text-whatsapp-dk hover:bg-whatsapp/20',

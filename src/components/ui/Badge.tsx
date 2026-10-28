@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import type { ReactNode } from 'react';
 
 const VARIANTS = {
-  organic: 'bg-marigold text-forest',
+  natural: 'bg-marigold text-forest',
   forest: 'bg-forest text-cream',
   soft: 'bg-sage/15 text-forest',
   accent: 'bg-terracotta text-white',

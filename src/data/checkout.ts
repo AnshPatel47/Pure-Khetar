@@ -1,7 +1,28 @@
 import { Banknote, Smartphone, type LucideIcon } from 'lucide-react';
 
-/** Cities we currently deliver to — edit this list as delivery expands. */
-export const DELIVERY_CITIES = ['Ahmedabad', 'Gandhinagar', 'Anand', 'Nadiad', 'Vadodara'] as const;
+/** Delivery areas currently available in Visnagar taluka. */
+export const DELIVERY_CITIES = ['Visnagar'] as const;
+
+export const VISNAGAR_VILLAGES = [
+  'Visnagar Town',
+  'Kamana',
+  'Kansa',
+  'Amlivada',
+  'Biliya',
+  'Chalasan',
+  'Dabhad',
+  'Dangarva',
+  'Dholasan',
+  'Gojhariya',
+  'Kadiyadara',
+  'Panchot',
+  'Punasan',
+  'Rajpur',
+  'Ransipur',
+  'Sardarpur',
+  'Valam',
+  'Other village',
+] as const;
 
 export const DELIVERY_SLOTS_INFO = [
   { id: 'morning', label: 'Morning Harvest', time: '6 AM – 9 AM', desc: 'Freshest possible — picked at sunrise', emoji: '🌅', recommended: true },

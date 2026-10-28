@@ -5,8 +5,8 @@
  */
 export const SEED_PRODUCTS = [
   {
-    slug: 'organic-ringan',
-    name: 'Organic Ringan (Eggplant)',
+    slug: 'natural-ringan',
+    name: 'Natural Ringan (Eggplant)',
     description:
       'Tender, pesticide-free local Ringan grown under traditional net-house farming at Kamana. Harvested at sunrise for peak freshness. Current market rate: ₹45–60/kg.',
     price: 45,
@@ -19,9 +19,9 @@ export const SEED_PRODUCTS = [
   },
   {
     slug: 'fresh-fulawar',
-    name: 'Fresh Organic Fulawar (Cauliflower)',
+    name: 'Fresh Natural Fulawar (Cauliflower)',
     description:
-      'Crisp, snow-white organic cauliflower harvested at sunrise by Sureshbhai and team. No pesticides, no chemicals — just pure Vedic farming. Market rate: ₹50–80/pc.',
+      'Crisp, snow-white natural cauliflower harvested at sunrise by Sureshbhai and team. No pesticides, no chemicals — just pure Vedic farming. Market rate: ₹50–80/pc.',
     price: 60,
     unit: 'pc',
     stock: 85,
@@ -31,10 +31,10 @@ export const SEED_PRODUCTS = [
     categorySlug: 'vegetables',
   },
   {
-    slug: 'organic-papaya',
-    name: 'Organic Papaya (Papita)',
+    slug: 'natural-papaya',
+    name: 'Natural Papaya (Papita)',
     description:
-      'Sweet, sun-ripened organic papaya from our Kamana farm. Rich in enzymes and grown with A2 Vedic manure — zero synthetic inputs. Current market rate: ₹50–70/kg.',
+      'Sweet, sun-ripened natural papaya from our Kamana farm. Rich in enzymes and grown with A2 Vedic manure — zero synthetic inputs. Current market rate: ₹50–70/kg.',
     price: 55,
     unit: 'kg',
     stock: 60,
@@ -42,7 +42,7 @@ export const SEED_PRODUCTS = [
       '/images/products/papaya.jpeg',
       '/images/products/papaya2.jpeg',
       '/images/products/papaya3.jpeg',
-      '/images/products/organicPapayaTree.jpeg',
+      '/images/products/naturalPapayaTree.jpeg',
     ],
     isOrganic: true,
     isFeatured: true,

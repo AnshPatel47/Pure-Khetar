@@ -29,7 +29,7 @@ export default async function ShopPage({ searchParams = {} }: ShopPageProps) {
     <>
       <PageHero
         bgImage="/images/farm/Farming.jpeg"
-        eyebrow="100% Pure Organic"
+        eyebrow="100% Pure Natural"
         title="Kamana Farm Marketplace"
         description="Nourished with A2 Vedic manure and harvested daily at sunrise. Zero synthetic chemicals or pesticides."
       />

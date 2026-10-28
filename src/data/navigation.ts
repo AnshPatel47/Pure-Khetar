@@ -15,42 +15,11 @@ export interface NavItem {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  {
-    label: 'Shop',
-    href: '/shop',
-    children: [
-      {
-        label: 'Fresh Vegetables',
-        href: '/shop?category=vegetables',
-        description: 'Fulawar and more, harvested fresh',
-        image: '/images/products/fulawar.jpeg',
-      },
-      {
-        label: 'Fruiting Veggies',
-        href: '/shop?category=fruiting',
-        description: 'Ringan from our Kamana fields',
-        image: '/images/products/ringan.jpeg',
-      },
-    ],
-  },
-  { label: 'Weekly Baskets', href: '/weekly-baskets', badge: 'New' },
-  { label: 'Our Journey', href: '/journey' },
-  {
-    label: 'Our Farm',
-    href: '/our-farm',
-    children: [
-      {
-        label: 'Kamana Net-House',
-        href: '/our-farm#nethouse',
-        description: 'Shade-net beds and nursery',
-        image: '/images/farm/nethouse-farming.jpeg',
-      },
-      { label: 'Farm Life & Dairy', href: '/our-farm#dairy', description: 'Cows, buffaloes and natural manure' },
-      { label: 'Lab Reports', href: '/our-farm#lab-reports', description: 'Our testing and quality checks' },
-    ],
-  },
-  { label: 'Our Team', href: '/team' },
+  { label: 'Shop', href: '/shop' },
+  { label: 'About', href: '/about' },
+  { label: 'Our Farm', href: '/our-farm' },
   { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const ANNOUNCEMENTS = [

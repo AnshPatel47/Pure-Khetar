@@ -29,7 +29,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           className={`object-cover transition-transform duration-500 group-hover:scale-105 ${soldOut ? 'grayscale' : ''}`}
         />
         <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-          {product.isOrganic && <Badge variant="organic">Organic</Badge>}
+          {product.isOrganic && <Badge variant="natural">Natural</Badge>}
           {lowStock && <Badge variant="accent">Only {product.stock} left</Badge>}
           {soldOut && <Badge variant="danger">Sold out</Badge>}
         </div>

@@ -49,14 +49,14 @@ export function SlotStep({ slot, date, onSlotChange, onDateChange, onNext, onBac
                 <div
                   className={cn(
                     'flex items-center gap-4 rounded-2xl border-2 p-4 transition-all duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-marigold',
-                    selected ? 'border-forest bg-forest/5 shadow-organic' : 'border-sage/15 bg-white hover:border-sage/40',
+                    selected ? 'border-forest bg-forest/5 shadow-natural' : 'border-sage/15 bg-white hover:border-sage/40',
                   )}
                 >
                   <span className="text-2xl" aria-hidden>{option.emoji}</span>
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
                       <p className="text-sm font-bold text-forest">{option.label}</p>
-                      {option.recommended && <Badge variant="organic">Recommended</Badge>}
+                      {option.recommended && <Badge variant="natural">Recommended</Badge>}
                     </div>
                     <p className="text-xs font-semibold text-sage">{option.time}</p>
                     <p className="mt-0.5 text-[11px] text-forest/50">{option.desc}</p>

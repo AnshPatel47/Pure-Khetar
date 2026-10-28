@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { Field, inputClass } from './Field';
 import { Button } from '@/components/ui/Button';
-import { DELIVERY_CITIES } from '@/data/checkout';
+import { DELIVERY_CITIES, VISNAGAR_VILLAGES } from '@/data/checkout';
 import { shippingSchema } from '@/lib/validations/checkout.schema';
 
 export interface AddressForm {
@@ -13,6 +13,8 @@ export interface AddressForm {
   address: string;
   area: string;
   city: string;
+  village: string;
+  customVillage: string;
   pincode: string;
   landmark: string;
 }
@@ -33,8 +35,15 @@ export function AddressStep({ value, onChange, onNext }: AddressStepProps) {
 
   // Same schema the server uses, so the messages match what the server would say.
   const handleNext = () => {
-    const result = shippingSchema.safeParse(value);
-    if (result.success) return onNext();
+    const deliveryValue = {
+      ...value,
+      village: value.village === 'Other village' ? value.customVillage : value.village,
+    };
+    const result = shippingSchema.safeParse(deliveryValue);
+    if (result.success) {
+      onChange(deliveryValue);
+      return onNext();
+    }
 
     const fieldErrors = result.error.flatten().fieldErrors;
     setErrors(Object.fromEntries(Object.entries(fieldErrors).map(([key, messages]) => [key, messages?.[0]])));
@@ -60,20 +69,31 @@ export function AddressStep({ value, onChange, onNext }: AddressStepProps) {
       </Field>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <Field label="City" error={errors.city}>
+        <Field label="Taluka / City" error={errors.city}>
           <select className={inputClass} value={value.city} onChange={set('city')}>
-            {DELIVERY_CITIES.map((city) => (
-              <option key={city}>{city}</option>
-            ))}
+            {DELIVERY_CITIES.map((city) => <option key={city}>{city}</option>)}
+          </select>
+        </Field>
+        <Field label="Village *" error={errors.village}>
+          <select className={inputClass} value={value.village} onChange={set('village')}>
+            <option value="">Select village</option>
+            {VISNAGAR_VILLAGES.map((village) => <option key={village} value={village}>{village}</option>)}
           </select>
         </Field>
         <Field label="Pincode *" error={errors.pincode}>
-          <input className={inputClass} inputMode="numeric" autoComplete="postal-code" maxLength={6} placeholder="380015" value={value.pincode} onChange={set('pincode')} />
-        </Field>
-        <Field label="State">
-          <input className={inputClass} value="Gujarat" readOnly />
+          <input className={inputClass} inputMode="numeric" autoComplete="postal-code" maxLength={6} placeholder="384315" value={value.pincode} onChange={set('pincode')} />
         </Field>
       </div>
+
+      {value.village === 'Other village' && (
+        <Field label="Village name *" error={errors.village}>
+          <input className={inputClass} value={value.customVillage} onChange={(event) => onChange({ ...value, customVillage: event.target.value })} placeholder="Enter village name" />
+        </Field>
+      )}
+
+      <Field label="State">
+        <input className={inputClass} value="Gujarat" readOnly />
+      </Field>
 
       <Field label="Landmark (optional)">
         <input className={inputClass} placeholder="Near ISKCON temple" value={value.landmark} onChange={set('landmark')} />

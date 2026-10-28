@@ -83,7 +83,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
           <div className="space-y-6 lg:py-4">
             <div className="flex flex-wrap items-center gap-2">
-              {product.isOrganic && <Badge variant="organic">Organic</Badge>}
+              {product.isOrganic && <Badge variant="natural">Natural</Badge>}
               <Badge variant={soldOut ? 'danger' : 'soft'}>
                 {soldOut ? 'Sold out' : product.stock <= 10 ? `Only ${product.stock} left` : 'In stock'}
               </Badge>

@@ -52,20 +52,23 @@ export function NavLinks() {
             >
               <div
                 className={cn(
-                  'relative flex items-center rounded-xl transition-colors',
-                  expanded ? 'bg-forest/5' : 'hover:bg-forest/5',
+                  'relative flex items-center rounded-lg transition-colors',
                 )}
               >
                 <Link
                   href={item.href}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'relative flex items-center rounded-xl py-2.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-marigold',
+                    'group relative flex items-center rounded-lg py-2.5 text-[13px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-marigold',
                     hasMenu ? 'pl-3.5 pr-1' : 'px-3.5',
                     active ? 'text-forest' : 'text-forest/75 hover:text-forest',
                   )}
                 >
                   {item.label}
+                  <span
+                    aria-hidden
+                    className="absolute bottom-1 left-3.5 right-3.5 h-0.5 origin-center scale-x-0 rounded-full bg-marigold transition-transform duration-[400ms] ease-in-out group-hover:scale-x-100"
+                  />
                   {item.badge && (
                     <span className="absolute -right-0.5 -top-1 rounded-full bg-terracotta px-1.5 py-0.5 text-[9px] font-bold leading-none text-white shadow-sm">
                       {item.badge}

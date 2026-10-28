@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -9,7 +9,7 @@ import { AddressStep, type AddressForm } from '@/components/checkout/AddressStep
 import { CheckoutStepBar, type CheckoutStep } from '@/components/checkout/CheckoutStepBar';
 import { OrderPreview } from '@/components/checkout/OrderPreview';
 import { OrderSuccess } from '@/components/checkout/OrderSuccess';
-import { PaymentStep } from '@/components/checkout/PaymentStep';
+import { PaymentStep, type PaymentIntent } from '@/components/checkout/PaymentStep';
 import { SlotStep } from '@/components/checkout/SlotStep';
 import { Container } from '@/components/layout/Container';
 import { Button } from '@/components/ui/Button';
@@ -32,6 +32,8 @@ const EMPTY_ADDRESS: AddressForm = {
   address: '',
   area: '',
   city: DELIVERY_CITIES[0],
+  village: '',
+  customVillage: '',
   pincode: '',
   landmark: '',
 };
@@ -44,7 +46,7 @@ const slideVariants = {
 
 export default function CheckoutPage() {
   const { data: session } = useSession();
-  const { items, totals, hydrated, clearCart, note } = useCart();
+  const { items, totals, hydrated, clearCart, removeItem, updateQuantity, note } = useCart();
 
   const [step, setStep] = useState<CheckoutStep>('address');
   const [address, setAddress] = useState<AddressForm>(EMPTY_ADDRESS);
@@ -54,12 +56,43 @@ export default function CheckoutPage() {
   const [placing, setPlacing] = useState(false);
   const [error, setError] = useState<string>();
   const [placed, setPlaced] = useState<{ orderId: string; total: number } | null>(null);
+  const [paymentIntent, setPaymentIntent] = useState<PaymentIntent>();
 
   // Pre-fill the receiver's name from their account.
   const accountName = session?.user?.name;
   useEffect(() => {
     if (accountName) setAddress((current) => (current.name ? current : { ...current, name: accountName }));
   }, [accountName]);
+
+  const cartReconciled = useRef(false);
+  useEffect(() => {
+    if (!hydrated || cartReconciled.current || items.length === 0) return;
+    cartReconciled.current = true;
+
+    void fetch('/api/cart/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids: items.map((item) => item.id) }),
+    })
+      .then((response) => response.ok ? response.json() : Promise.reject())
+      .then((result: { products: Array<{ id: string; name: string; stock: number }> }) => {
+        const liveProducts = new Map(result.products.map((product) => [product.id, product]));
+        let removedCount = 0;
+        for (const item of items) {
+          const live = liveProducts.get(item.id);
+          if (!live || live.stock <= 0) {
+            removeItem(item.id);
+            removedCount += 1;
+          } else if (item.quantity > live.stock) {
+            updateQuantity(item.id, live.stock);
+          }
+        }
+        if (removedCount > 0) {
+          setError(`${removedCount} unavailable item${removedCount === 1 ? ' was' : 's were'} removed from your crate. Please review your order.`);
+        }
+      })
+      .catch(() => setError('We could not verify the latest product availability.'));
+  }, [hydrated, items, removeItem, updateQuantity]);
 
   const handlePlace = async () => {
     setError(undefined);
@@ -76,8 +109,23 @@ export default function CheckoutPage() {
 
     setPlacing(false);
     if (result.ok) {
-      clearCart();
-      setPlaced({ orderId: result.orderId, total: result.total });
+      if (method === 'COD') {
+        clearCart();
+        setPlaced({ orderId: result.orderId, total: result.total });
+        return;
+      }
+
+      const intentResponse = await fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId: result.orderId }),
+      });
+      const intent = await intentResponse.json().catch(() => null);
+      if (!intentResponse.ok || !intent?.tr) {
+        setError(intent?.error ?? 'We could not start UPI payment. Please try again.');
+        return;
+      }
+      setPaymentIntent(intent as PaymentIntent);
     } else {
       setError(result.message);
     }
@@ -155,6 +203,15 @@ export default function CheckoutPage() {
                     error={error}
                     onPlace={handlePlace}
                     onBack={() => setStep('slot')}
+                    paymentIntent={paymentIntent}
+                    onPaymentCompleted={() => {
+                      if (!paymentIntent) return;
+                      clearCart();
+                      setPlaced({ orderId: paymentIntent.orderId, total: paymentIntent.amount });
+                    }}
+                    onPaymentExpired={() => {
+                      setPaymentIntent((current) => current ? { ...current, status: 'EXPIRED' } : current);
+                    }}
                   />
                 )}
               </motion.div>

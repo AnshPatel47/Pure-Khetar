@@ -12,7 +12,7 @@ npm run db:seed                  # adds categories + products (safe to re-run)
 npm run dev                      # http://localhost:3000
 ```
 
-> Already have a `.env`? Keep it. Just make sure it has `DATABASE_URL`, `DIRECT_URL` and `AUTH_SECRET`.
+> Already have a `.env`? Keep it. For the payment flow, also configure `NEXT_PUBLIC_UPI_VPA` with the verified merchant UPI ID and `UPI_WEBHOOK_SECRET` before deployment.
 > `.env` is git-ignored — never commit it.
 
 ## Folder structure
@@ -61,5 +61,7 @@ src/
 
 ## Deploying (Vercel)
 
-Add `DATABASE_URL`, `DIRECT_URL`, `AUTH_SECRET`, `NEXT_PUBLIC_SITE_URL` as environment variables.
-Use a **different** `AUTH_SECRET` than your laptop. Build command is already `prisma generate && next build`.
+Add `DATABASE_URL`, `DIRECT_URL`, `AUTH_SECRET`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_UPI_VPA`, and `UPI_WEBHOOK_SECRET` as environment variables.
+Use a **different** `AUTH_SECRET` than your laptop.
+
+The `vercel-build` script automatically runs `prisma migrate deploy` before generating Prisma Client and building the Next.js app. Therefore, pushing these changes redeploys the application and applies the payment migration; do not run `prisma db push` or change the database manually.

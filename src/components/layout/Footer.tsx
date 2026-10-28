@@ -1,19 +1,19 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Leaf, MapPin, Phone, Mail, ArrowRight, Sprout } from 'lucide-react';
+import { MapPin, Phone, Mail, ArrowRight, Sprout } from 'lucide-react';
 import { CONTACT, SITE, mailLink, whatsappLink } from '@/lib/constants';
+import { Logo } from './Logo';
 
 const FOOTER_LINKS = {
   Shop: [
     { label: 'All Produce', href: '/shop' },
     { label: 'Fresh Vegetables', href: '/shop?category=vegetables' },
     { label: 'Fruiting Veggies', href: '/shop?category=fruiting' },
-    { label: 'Weekly Baskets', href: '/weekly-baskets' },
   ],
   'Our Farm': [
     { label: 'Net-House Farming', href: '/our-farm#nethouse' },
-    { label: 'Gir Cow Dairy', href: '/our-farm#dairy' },
+    { label: 'Cow Dairy', href: '/our-farm#dairy' },
     { label: 'Lab Reports', href: '/our-farm#lab-reports' },
     { label: 'Our Journey', href: '/journey' },
   ],
@@ -66,16 +66,9 @@ export function Footer() {
 
           {/* Brand column */}
           <div className="col-span-2">
-            <Link href="/" className="flex items-center gap-2.5 mb-5">
-              <div className="w-8 h-8 bg-marigold rounded-lg flex items-center justify-center">
-                <Leaf className="w-4 h-4 text-forest" />
-              </div>
-              <span className="font-serif text-xl font-bold text-cream">
-                Pure <span className="text-marigold">Khetar</span>
-              </span>
-            </Link>
+            <Logo tone="light" showTagline className="mb-5" />
             <p className="text-cream/60 text-sm leading-relaxed mb-6 max-w-xs">
-              Directly from Patel Sureshbhai&apos;s organic farm in Kamana, Gujarat. 50+ years of 
+              Directly from Patel Sureshbhai&apos;s family farm in Kamana, Gujarat. 50+ years of 
               Vedic farming — zero chemicals, maximum purity.
             </p>
 

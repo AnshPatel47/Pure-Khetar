@@ -6,7 +6,7 @@ import { getAllProductSlugs } from '@/services/product.service';
 
 export const revalidate = 3600;
 
-const STATIC_PAGES = ['/', '/shop', '/weekly-baskets', '/journey', '/our-farm', '/team', '/blog', '/contact'];
+const STATIC_PAGES = ['/', '/shop', '/journey', '/our-farm', '/team', '/blog', '/contact'];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const products = await safeQuery('sitemap products', () => getAllProductSlugs(), []);

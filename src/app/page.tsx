@@ -3,7 +3,7 @@ import { CategorySection } from '@/components/home/CategorySection';
 import { FeaturedProducts, FeaturedProductsSkeleton } from '@/components/home/FeaturedProducts';
 import { HeroSection } from '@/components/home/HeroSection';
 import { JourneySection } from '@/components/home/JourneySection';
-import { LazyBlogPreview, LazyFarmReels, LazyWeeklyBasket } from '@/components/home/LazyHomeSections';
+import { LazyBlogPreview, LazyFarmReels } from '@/components/home/LazyHomeSections';
 import { QualitySection } from '@/components/home/QualitySection';
 import { TrustStrip } from '@/components/home/TrustStrip';
 
@@ -35,7 +35,6 @@ export default function HomePage() {
 
       {/* …and these don't even download their code or videos until you scroll close */}
       <LazyFarmReels />
-      <LazyWeeklyBasket />
       <LazyBlogPreview />
     </div>
   );

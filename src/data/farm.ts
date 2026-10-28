@@ -26,8 +26,8 @@ export const FARM_VIDEOS: FarmVideo[] = [
   },
   {
     id: 'dairy',
-    src: '/videos/organic-derry-farm.mp4',
-    poster: '/videos/organic-derry-farm-poster.jpg',
+    src: '/videos/natural-derry-farm.mp4',
+    poster: '/videos/natural-derry-farm-poster.jpg',
     title: 'Farm life',
     caption: 'Our buffaloes resting in the shade at the farm.',
   },
@@ -77,7 +77,7 @@ export const FARM_VIDEOS: FarmVideo[] = [
     id: 'papaya-plant',
     src: '/videos/papaya_plant.mp4',
     title: 'Papaya trees',
-    caption: 'Our organic papaya trees growing tall in the Gujarat sun.',
+    caption: 'Our natural papaya trees growing tall in the Gujarat sun.',
   },
   {
     id: 'tabelo',
@@ -89,7 +89,7 @@ export const FARM_VIDEOS: FarmVideo[] = [
     id: 'veges-farm',
     src: '/videos/vegesFarm.mp4',
     title: 'Vegetable fields',
-    caption: 'Rows of fresh organic vegetables ready for harvest.',
+    caption: 'Rows of fresh natural vegetables ready for harvest.',
   },
 ];
 
@@ -167,8 +167,8 @@ export const FARM_PHOTOS: FarmPhoto[] = [
   {
     id: 'f3',
     src: '/images/farm/f3.jpeg',
-    alt: 'Another view of the organic farm at Kamana',
-    title: 'Organic rows',
+    alt: 'Another view of the natural farm at Kamana',
+    title: 'Natural rows',
     caption: 'Every row planted with care and purpose.',
   },
   {

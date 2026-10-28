@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: '%s | Pure Khetar',
   },
   description: SITE.description,
-  keywords: ['organic vegetables', 'Gujarat farm', 'Kamana farm', 'Visnagar', 'traditional farming', 'pure khetar'],
+  keywords: ['natural vegetables', 'Gujarat farm', 'Kamana farm', 'Visnagar', 'traditional farming', 'pure khetar'],
   openGraph: {
     title: 'Pure Khetar — Farm-fresh vegetables from Kamana, Gujarat',
     description: SITE.description,
