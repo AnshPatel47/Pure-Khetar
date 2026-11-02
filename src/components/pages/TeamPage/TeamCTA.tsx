@@ -7,7 +7,7 @@ export function TeamCTA() {
     <section className="py-16 bg-cream-dk">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="bg-forest rounded-4xl p-8 sm:p-12 text-center relative overflow-hidden">
+          <div className="relative overflow-hidden rounded-4xl border border-sage/20 bg-white p-8 text-center sm:p-12 shadow-card">
             <div
               className="absolute inset-0 opacity-5"
               style={{
@@ -15,10 +15,10 @@ export function TeamCTA() {
                 backgroundSize: '28px 28px',
               }}
             />
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-cream mb-4 relative z-10">
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-forest mb-4 relative z-10">
               Grow With Us
             </h2>
-            <p className="text-cream/70 mb-8 relative z-10 max-w-lg mx-auto">
+            <p className="text-forest/70 mb-8 relative z-10 max-w-lg mx-auto">
               Questions about our practices? Want to visit the farm?
               We love meeting the families we feed — reach out anytime.
             </p>
@@ -32,7 +32,7 @@ export function TeamCTA() {
               </Link>
               <Link
                 href="/our-farm"
-                className="inline-flex items-center gap-2 glass border border-white/30 text-cream px-7 py-4 rounded-full font-bold text-sm hover:bg-white/15 transition-colors"
+                className="inline-flex items-center gap-2 rounded-full border border-forest/30 px-7 py-4 text-sm font-bold text-forest transition-colors hover:bg-forest hover:text-cream"
               >
                 Visit Our Farm
               </Link>

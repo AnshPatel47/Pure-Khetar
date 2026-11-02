@@ -23,7 +23,7 @@ export function MegaMenu({ item, onNavigate }: MegaMenuProps) {
       transition={{ duration: 0.18, ease: 'easeOut' }}
       className="absolute left-1/2 top-full z-50 w-80 -translate-x-1/2 pt-3"
     >
-      <div className="glass-cream rounded-2xl border border-sage/20 p-3 shadow-organic-lg">
+      <div className="glass-cream rounded-2xl border border-sage/20 p-3 shadow-natural-lg">
         <ul className="grid gap-1">
           {item.children.map((child) => (
             <li key={child.label}>

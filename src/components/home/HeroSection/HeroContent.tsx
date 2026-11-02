@@ -17,7 +17,7 @@ export function HeroContent() {
     <div className="max-w-[640px] space-y-7">
       {/* Glowing badge */}
       <motion.div {...fadeUp(0)}>
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/25 text-marigold text-xs font-bold uppercase tracking-widest shadow-glow-gold">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-sage/20 text-forest text-xs font-bold uppercase tracking-widest shadow-card">
           <motion.span
             animate={{ rotate: [0, 15, -15, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
@@ -32,15 +32,15 @@ export function HeroContent() {
       {/* Headline */}
       <motion.h1
         {...fadeUp(0.15)}
-        className="font-serif text-[2.6rem] sm:text-6xl lg:text-7xl font-bold text-cream leading-[1.08] drop-shadow-lg"
+        className="font-serif text-[2.35rem] sm:text-5xl lg:text-[4rem] font-bold text-forest leading-[1.08] drop-shadow-sm"
       >
         ROOTED IN NATURE,
         <br />
-        <span className="text-marigold">CULTIVATED WITH CARE.</span>
+        <span className="text-sage">CULTIVATED WITH CARE.</span>
       </motion.h1>
 
       {/* Subtitle */}
-      <motion.p {...fadeUp(0.3)} className="text-base sm:text-lg text-cream/80 leading-relaxed font-light max-w-lg">
+      <motion.p {...fadeUp(0.3)} className="text-base sm:text-lg text-forest/75 leading-relaxed font-light max-w-lg">
         Nourished with Gir Cow A2 Vedic manure and harvested daily at sunrise.
         Delivered straight to your doorstep — guaranteed purity, every morning.
       </motion.p>
@@ -49,7 +49,7 @@ export function HeroContent() {
       <motion.div {...fadeUp(0.45)} className="flex flex-wrap items-center gap-3 pt-1">
         <Link
           href="/shop"
-          className="group inline-flex items-center gap-2 bg-marigold text-forest px-7 py-4 rounded-full font-bold text-sm shadow-glow-gold hover:bg-white hover:shadow-organic-lg transition-all duration-300 hover:-translate-y-0.5"
+          className="group inline-flex items-center gap-2 bg-marigold text-forest px-7 py-4 rounded-full font-bold text-sm shadow-glow-gold hover:bg-white hover:shadow-natural-lg transition-all duration-300 hover:-translate-y-0.5"
         >
           <Leaf className="w-4 h-4" />
           <span>Explore Fresh Produce</span>
@@ -69,9 +69,9 @@ export function HeroContent() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.65 }}
-        className="pt-7 border-t border-white/12"
+        className="pt-7 border-t border-forest/15"
       >
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 text-xs text-cream/75">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 text-xs text-forest/70">
           {TRUST_PROPS.map(({ icon, text }) => (
             <div key={text} className="flex items-center gap-2">
               {icon}

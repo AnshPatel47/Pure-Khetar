@@ -11,11 +11,11 @@ interface PageHeaderProps {
 /** Green banner used at the top of simple content pages. */
 export function PageHeader({ title, description, eyebrow, children }: PageHeaderProps) {
   return (
-    <section className="bg-forest text-cream">
+    <section className="bg-cream text-forest border-b border-sage/20">
       <Container className="space-y-4 py-14 sm:py-20">
         {eyebrow && <p className="text-sm font-semibold text-marigold">{eyebrow}</p>}
         <h1 className="max-w-3xl font-serif text-4xl font-bold leading-tight text-balance sm:text-5xl">{title}</h1>
-        {description && <p className="max-w-2xl text-base leading-relaxed text-cream/75 sm:text-lg">{description}</p>}
+        {description && <p className="max-w-2xl text-base leading-relaxed text-forest/75 sm:text-lg">{description}</p>}
         {children}
       </Container>
     </section>

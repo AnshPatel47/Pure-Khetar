@@ -1,4 +1,4 @@
-import { FarmGallery } from '@/components/home/FarmGallery';
+import { FarmPhotoMarquee } from './FarmPhotoMarquee';
 import { FarmHero } from './FarmHero';
 import { NetHouseIntro } from './NetHouseIntro';
 import { FarmPracticesGrid } from './FarmPracticesGrid';
@@ -11,13 +11,13 @@ export default function OurFarmPage() {
   return (
     <div className="bg-cream overflow-x-hidden">
       <FarmHero />
+      <FarmPhotoMarquee />
       <NetHouseIntro />
       <FarmPracticesGrid />
       <DairyVideoSection />
       <WaterConservationSection />
       <LabCertificationsSection />
       <FarmCTA />
-      <FarmGallery />
     </div>
   );
 }

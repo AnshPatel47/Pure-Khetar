@@ -7,7 +7,7 @@ export interface ProductSummary {
   unit: string;
   stock: number;
   images: string[];
-  isOrganic: boolean;
+  isChemicalFree: boolean;
   isFeatured: boolean;
   category: { name: string; slug: string };
 }

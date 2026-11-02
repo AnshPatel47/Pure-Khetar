@@ -31,7 +31,7 @@ export const productInputSchema = z.object({
   unit: z.string().trim().min(1).max(12).default('kg'),
   stock: z.number().int().min(0).max(100_000),
   images: z.array(z.string().startsWith('/')).min(1),
-  isOrganic: z.boolean().default(true),
+  isChemicalFree: z.boolean().default(true),
   isFeatured: z.boolean().default(false),
   categoryId: z.string().min(1),
 });

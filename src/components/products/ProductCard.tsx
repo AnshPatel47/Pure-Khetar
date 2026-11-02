@@ -1,4 +1,8 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useReducedMotion } from 'framer-motion';
 import { Badge } from '@/components/ui/Badge';
 import { SmartImage } from '@/components/ui/SmartImage';
 import { AddToCartButton } from './AddToCartButton';
@@ -16,24 +20,55 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const href = `/products/${product.slug}`;
   const soldOut = product.stock <= 0;
   const lowStock = !soldOut && product.stock <= 10;
+  const images = product.images.length ? product.images : [FALLBACK_PRODUCT_IMAGE];
+  const [activeImage, setActiveImage] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (images.length < 2 || paused || reduceMotion) return;
+    const timer = window.setInterval(() => setActiveImage((current) => (current + 1) % images.length), 3200);
+    return () => window.clearInterval(timer);
+  }, [images.length, paused, reduceMotion]);
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-3xl border border-sage/15 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
-      <Link href={href} className="relative block aspect-[4/3] overflow-hidden bg-cream" tabIndex={-1} aria-hidden>
-        <SmartImage
-          src={product.images[0] ?? FALLBACK_PRODUCT_IMAGE}
-          alt=""
-          fill
-          priority={priority}
-          sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
-          className={`object-cover transition-transform duration-500 group-hover:scale-105 ${soldOut ? 'grayscale' : ''}`}
-        />
+      <div
+        className="relative block aspect-[16/9] overflow-hidden bg-cream"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onTouchStart={() => setPaused(true)}
+        onTouchEnd={() => setPaused(false)}
+      >
+        <Link href={href} aria-label={`View ${product.name}`} className="absolute inset-0">
+          <SmartImage
+            src={images[activeImage]}
+            alt={product.name}
+            fill
+            priority={priority}
+            sizes="(min-width: 1280px) 22vw, (min-width: 640px) 38vw, 92vw"
+            className={`object-cover transition-opacity duration-500 group-hover:scale-[1.03] ${soldOut ? 'grayscale' : ''}`}
+          />
+        </Link>
         <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-          {product.isOrganic && <Badge variant="natural">Natural</Badge>}
+          {product.isChemicalFree && <Badge variant="natural">Natural</Badge>}
           {lowStock && <Badge variant="accent">Only {product.stock} left</Badge>}
           {soldOut && <Badge variant="danger">Sold out</Badge>}
         </div>
-      </Link>
+        {images.length > 1 && (
+          <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1.5 rounded-full bg-white/85 px-2 py-1 backdrop-blur-sm">
+            {images.map((image, index) => (
+              <button
+                key={image}
+                type="button"
+                aria-label={`Show image ${index + 1} of ${images.length}`}
+                onClick={() => setActiveImage(index)}
+                className={`h-1.5 rounded-full transition-all ${index === activeImage ? 'w-4 bg-forest' : 'w-1.5 bg-forest/35'}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
 
       <div className="flex flex-1 flex-col p-5">
         <p className="text-xs font-semibold text-sage">{product.category.name}</p>

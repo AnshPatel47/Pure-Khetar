@@ -9,7 +9,7 @@ export function WaterStorySection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <Reveal>
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-organic-lg">
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-natural-lg">
               <Image
                 src="/images/farm/classic-watering.jpeg"
                 alt="Classic water conservation at Kamana farm"

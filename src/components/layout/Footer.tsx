@@ -18,7 +18,7 @@ const FOOTER_LINKS = {
     { label: 'Our Journey', href: '/journey' },
   ],
   Company: [
-    { label: 'Meet the Team', href: '/team' },
+    { label: 'About & Team', href: '/about' },
     { label: 'Blog & Recipes', href: '/blog' },
     { label: 'Contact Us', href: '/contact' },
     { label: 'My Account', href: '/account' },
@@ -27,7 +27,7 @@ const FOOTER_LINKS = {
 
 export function Footer() {
   return (
-    <footer className="bg-forest text-cream relative overflow-hidden">
+    <footer className="relative overflow-hidden border-t border-sage/20 bg-cream text-forest">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-[0.04]"
         style={{
@@ -37,14 +37,14 @@ export function Footer() {
       />
 
       {/* Top CTA strip */}
-      <div className="relative z-10 border-b border-white/8">
+      <div className="relative z-10 border-b border-sage/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
             <div>
-              <p className="font-serif text-2xl font-bold text-cream">
+              <p className="font-serif text-2xl font-bold text-forest">
                 Ready for your morning harvest? 🌾
               </p>
-              <p className="text-cream/60 text-sm mt-1">
+              <p className="text-forest/60 text-sm mt-1">
                 Delivered fresh from Kamana farm before 9 AM.
               </p>
             </div>
@@ -66,28 +66,28 @@ export function Footer() {
 
           {/* Brand column */}
           <div className="col-span-2">
-            <Logo tone="light" showTagline className="mb-5" />
-            <p className="text-cream/60 text-sm leading-relaxed mb-6 max-w-xs">
+            <Logo  showTagline className="mb-5" />
+            <p className="text-forest/60 text-sm leading-relaxed mb-6 max-w-xs">
               Directly from Patel Sureshbhai&apos;s family farm in Kamana, Gujarat. 50+ years of 
               Vedic farming — zero chemicals, maximum purity.
             </p>
 
             {/* Contact */}
             <address className="space-y-2.5 not-italic">
-              <p className="flex items-start gap-2.5 text-xs text-cream/60">
+              <p className="flex items-start gap-2.5 text-xs text-forest/60">
                 <MapPin className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" aria-hidden />
                 {CONTACT.location}
               </p>
               <a
                 href={whatsappLink()}
-                className="flex items-center gap-2.5 text-xs text-cream/60 hover:text-marigold transition-colors"
+                className="flex items-center gap-2.5 text-xs text-forest/60 hover:text-marigold transition-colors"
               >
                 <Phone className="w-3.5 h-3.5" aria-hidden />
                 {CONTACT.phoneDisplay} (WhatsApp)
               </a>
               <a
                 href={mailLink}
-                className="flex items-center gap-2.5 text-xs text-cream/60 hover:text-marigold transition-colors"
+                className="flex items-center gap-2.5 text-xs text-forest/60 hover:text-marigold transition-colors"
               >
                 <Mail className="w-3.5 h-3.5" aria-hidden />
                 {CONTACT.email}
@@ -98,13 +98,13 @@ export function Footer() {
           {/* Nav columns */}
           {Object.entries(FOOTER_LINKS).map(([title, links]) => (
             <div key={title}>
-              <h3 className="text-xs font-bold text-cream/50 uppercase tracking-widest mb-4">{title}</h3>
+              <h3 className="text-xs font-bold text-forest/50 uppercase tracking-widest mb-4">{title}</h3>
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-cream/70 hover:text-cream hover:translate-x-1 transition-all duration-200 inline-block"
+                      className="text-sm text-forest/70 hover:text-forest hover:translate-x-1 transition-all duration-200 inline-block"
                     >
                       {link.label}
                     </Link>
@@ -117,13 +117,13 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="relative z-10 border-t border-white/8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/40">
+      <div className="relative z-10 border-t border-sage/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-forest/40">
           <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved. Kamana Farm, Gujarat.</p>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="hover:text-cream/70 transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-cream/70 transition-colors">Terms</Link>
-            <Link href="/refund" className="hover:text-cream/70 transition-colors">Refund Policy</Link>
+            <Link href="/privacy" className="hover:text-forest transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-forest transition-colors">Terms</Link>
+            <Link href="/refund" className="hover:text-forest transition-colors">Refund Policy</Link>
           </div>
         </div>
       </div>

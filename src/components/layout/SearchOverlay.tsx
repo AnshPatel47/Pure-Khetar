@@ -66,7 +66,7 @@ export function SearchOverlay({ onClose }: { onClose: () => void }) {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: -8, scale: 0.98 }}
         transition={{ duration: 0.2, ease: 'easeOut' }}
-        className="w-full max-w-xl overflow-hidden rounded-3xl border border-sage/20 bg-cream shadow-organic-lg"
+        className="w-full max-w-xl overflow-hidden rounded-3xl border border-sage/20 bg-cream shadow-natural-lg"
       >
         <form onSubmit={submit} className="flex items-center gap-3 border-b border-sage/15 px-5">
           {isFetching ? (

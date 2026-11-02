@@ -34,7 +34,7 @@ export function NetHouseIntro() {
 
         <Reveal delay={0.15}>
           <div className="relative">
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-organic-lg">
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-natural-lg">
               <Image
                 src="/images/farm/nethouse-farming.jpeg"
                 alt="Net-house farming at Kamana farm"

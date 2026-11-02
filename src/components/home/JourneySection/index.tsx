@@ -5,7 +5,7 @@ import { JourneyContent } from './JourneyContent';
 
 export function JourneySection() {
   return (
-    <section className="bg-forest relative overflow-hidden py-20 lg:py-28">
+    <section className="bg-cream-dk relative overflow-hidden py-20 lg:py-28">
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{

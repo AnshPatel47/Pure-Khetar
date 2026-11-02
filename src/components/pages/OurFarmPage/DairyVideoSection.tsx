@@ -17,7 +17,7 @@ export function DairyVideoSection() {
     <section id="dairy" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <Reveal delay={0.1}>
-          <div className="relative aspect-video rounded-3xl overflow-hidden bg-forest shadow-organic-lg group cursor-pointer">
+          <div className="relative aspect-video rounded-3xl overflow-hidden border border-sage/20 bg-cream shadow-natural-lg group cursor-pointer">
             <video
               src="/videos/natural-derry-farm.mp4"
               className="w-full h-full object-cover"

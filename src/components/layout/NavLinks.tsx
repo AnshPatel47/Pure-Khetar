@@ -9,13 +9,23 @@ import { MegaMenu } from './MegaMenu';
 import { NAV_ITEMS, isActivePath } from '@/data/navigation';
 import { cn } from '@/lib/utils';
 
-/** Desktop navigation with hover, click and keyboard-accessible dropdowns. */
-export function NavLinks() {
-  const pathname = usePathname();
+interface NavLinksProps {
+  /** True when the navbar has scrolled into its cream glass mode. */
+  scrolled?: boolean;
+}
+
+/**
+ * Desktop navigation.
+ *
+ * Single indicator system: the ACTIVE page gets ONE sliding green underline
+ * (layoutId="nav-indicator") that animates between items.
+ * Hover does NOT draw a line — it only changes text colour.
+ */
+export function NavLinks({ scrolled = true }: NavLinksProps) {
+  const pathname  = usePathname();
   const [openLabel, setOpenLabel] = useState<string | null>(null);
   const closeTimer = useRef<number>();
 
-  // Close any open menu when the page changes.
   useEffect(() => setOpenLabel(null), [pathname]);
   useEffect(() => () => window.clearTimeout(closeTimer.current), []);
 
@@ -23,7 +33,6 @@ export function NavLinks() {
     window.clearTimeout(closeTimer.current);
     setOpenLabel(label);
   };
-  // A short delay stops the menu flickering when the pointer crosses the small gap.
   const closeSoon = () => {
     window.clearTimeout(closeTimer.current);
     closeTimer.current = window.setTimeout(() => setOpenLabel(null), 120);
@@ -33,7 +42,7 @@ export function NavLinks() {
     <nav aria-label="Main" className="hidden md:block">
       <ul className="flex items-center gap-0.5 lg:gap-1">
         {NAV_ITEMS.map((item) => {
-          const active = isActivePath(pathname, item.href);
+          const active  = isActivePath(pathname, item.href);
           const hasMenu = Boolean(item.children);
           const expanded = openLabel === item.label;
 
@@ -50,29 +59,44 @@ export function NavLinks() {
                 if (event.key === 'Escape') setOpenLabel(null);
               }}
             >
-              <div
-                className={cn(
-                  'relative flex items-center rounded-lg transition-colors',
-                )}
-              >
+              <div className="relative flex items-center">
                 <Link
                   href={item.href}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'group relative flex items-center rounded-lg py-2.5 text-[13px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-marigold',
+                    // Base styles
+                    'relative flex items-center rounded-lg py-2.5 text-[13px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest',
                     hasMenu ? 'pl-3.5 pr-1' : 'px-3.5',
-                    active ? 'text-forest' : 'text-forest/75 hover:text-forest',
+                    // Transparent navbar: text is cream; after scroll: forest
+                    scrolled
+                      ? active
+                        ? 'text-forest'
+                        : 'text-forest/70 hover:text-forest'
+                      : active
+                        ? 'text-cream'
+                        : 'text-cream/80 hover:text-cream',
+                    // NO hover underline — only a subtle text colour lift
                   )}
                 >
                   {item.label}
-                  <span
-                    aria-hidden
-                    className="absolute bottom-1 left-3.5 right-3.5 h-0.5 origin-center scale-x-0 rounded-full bg-marigold transition-transform duration-[400ms] ease-in-out group-hover:scale-x-100"
-                  />
+
+                  {/* Badge (e.g. "New") */}
                   {item.badge && (
                     <span className="absolute -right-0.5 -top-1 rounded-full bg-terracotta px-1.5 py-0.5 text-[9px] font-bold leading-none text-white shadow-sm">
                       {item.badge}
                     </span>
+                  )}
+
+                  {/* Active sliding indicator — ONE per nav, slides between active items */}
+                  {active && (
+                    <motion.span
+                      layoutId="nav-indicator"
+                      className={cn(
+                        'absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full',
+                        'bg-forest',
+                      )}
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    />
                   )}
                 </Link>
 
@@ -83,18 +107,13 @@ export function NavLinks() {
                     aria-haspopup="true"
                     aria-expanded={expanded}
                     onClick={() => (expanded ? setOpenLabel(null) : open(item.label))}
-                    className="rounded-xl py-2.5 pl-0.5 pr-2.5 text-forest/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-marigold"
+                    className={cn(
+                      'rounded-xl py-2.5 pl-0.5 pr-2.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest',
+                      scrolled ? 'text-forest/60' : 'text-cream/70',
+                    )}
                   >
                     <ChevronDown className={cn('h-3.5 w-3.5 transition-transform duration-200', expanded && 'rotate-180')} />
                   </button>
-                )}
-
-                {active && (
-                  <motion.span
-                    layoutId="nav-active-indicator"
-                    className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-marigold"
-                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                  />
                 )}
               </div>
 
@@ -108,3 +127,4 @@ export function NavLinks() {
     </nav>
   );
 }
+

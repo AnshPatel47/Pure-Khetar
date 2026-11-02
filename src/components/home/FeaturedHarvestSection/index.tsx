@@ -118,7 +118,7 @@ export async function FeaturedHarvestSection() {
                 </div>
                 <AddToCartButton
                   product={product}
-                  className="flex items-center gap-1.5 bg-forest text-cream text-xs font-bold px-4 py-2.5 rounded-full hover:bg-forest-l transition-colors shadow-organic group-hover:shadow-organic-lg"
+                  className="flex items-center gap-1.5 bg-forest text-cream text-xs font-bold px-4 py-2.5 rounded-full hover:bg-forest-l transition-colors shadow-natural group-hover:shadow-natural-lg"
                 />
               </div>
             </div>
@@ -130,7 +130,7 @@ export async function FeaturedHarvestSection() {
       <div className="sm:hidden text-center mt-7">
         <Link
           href="/shop"
-          className="inline-flex items-center gap-2 bg-forest text-cream px-7 py-3.5 rounded-full font-bold text-sm shadow-organic"
+          className="inline-flex items-center gap-2 bg-forest text-cream px-7 py-3.5 rounded-full font-bold text-sm shadow-natural"
         >
           View All Produce
           <ArrowRight className="w-4 h-4" />

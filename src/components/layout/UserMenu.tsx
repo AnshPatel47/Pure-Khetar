@@ -65,7 +65,7 @@ export function UserMenu() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.97 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full z-50 mt-3 w-60 rounded-2xl border border-sage/20 bg-white p-2 shadow-organic-lg"
+            className="absolute right-0 top-full z-50 mt-3 w-60 rounded-2xl border border-sage/20 bg-white p-2 shadow-natural-lg"
           >
             <div className="border-b border-sage/15 px-3 pb-2.5 pt-2">
               <p className="truncate text-sm font-bold text-forest">{session.user.name}</p>

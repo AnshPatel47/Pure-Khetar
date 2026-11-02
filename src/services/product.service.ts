@@ -15,7 +15,7 @@ const productSelect = {
   unit: true,
   stock: true,
   images: true,
-  isOrganic: true,
+  isChemicalFree: true,
   isFeatured: true,
   category: { select: { name: true, slug: true } },
 } satisfies Prisma.ProductSelect;

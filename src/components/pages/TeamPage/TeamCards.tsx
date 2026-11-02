@@ -19,7 +19,7 @@ export function TeamCards() {
                     <motion.div
                       whileHover={{ y: -6 }}
                       transition={{ duration: 0.35 }}
-                      className="relative bg-white rounded-4xl overflow-hidden shadow-organic-lg border border-sage/10"
+                      className="relative bg-white rounded-4xl overflow-hidden shadow-natural-lg border border-sage/10"
                     >
                       <div className={`aspect-[4/3] bg-gradient-to-br ${member.accent} flex items-center justify-center relative`}>
                         <div
@@ -76,7 +76,7 @@ export function TeamCards() {
                       WhatsApp
                     </a>
                     <a
-                      href="mailto:hello@purekhetar.com"
+                      href="mailto:pureKhetar@gmail.com"
                       className="flex items-center gap-1.5 text-xs font-semibold text-forest/70 bg-forest/5 border border-forest/15 px-4 py-2.5 rounded-full hover:bg-forest/10 transition-colors"
                     >
                       <Mail className="w-3.5 h-3.5" />

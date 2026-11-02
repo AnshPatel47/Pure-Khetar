@@ -9,7 +9,7 @@ export function QualityImage() {
   return (
     <Reveal>
       <div className="relative">
-        <div className="aspect-[4/3] rounded-4xl overflow-hidden shadow-organic-lg">
+        <div className="aspect-[4/3] rounded-4xl overflow-hidden shadow-natural-lg">
           <Image
             src="/images/farm/nethouse-farming.jpeg"
             alt="Net-house farming quality — Pure Khetar"

@@ -5,7 +5,7 @@ import { Reveal } from '@/components/ui/Reveal';
 
 export function WaterConservationSection() {
   return (
-    <section className="bg-forest py-20 lg:py-28 relative overflow-hidden">
+    <section className="relative overflow-hidden bg-cream py-20 lg:py-28">
       {/* Bg dot pattern */}
       <div
         className="absolute inset-0 opacity-5"
@@ -21,11 +21,11 @@ export function WaterConservationSection() {
               <Droplets className="w-3.5 h-3.5" />
               Water Conservation
             </p>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-cream leading-tight mb-6">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-forest leading-tight mb-6">
               Ancient Wisdom,<br />
               <span className="text-marigold italic">Modern Precision</span>
             </h2>
-            <p className="text-cream/75 text-base leading-relaxed mb-8">
+            <p className="text-forest/70 text-base leading-relaxed mb-8">
               We combine traditional water harvesting techniques with modern drip-irrigation
               to conserve Gujarat&apos;s most precious resource — water. Our closed-loop system
               recycles runoff back to our compost pits.

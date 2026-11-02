@@ -9,13 +9,13 @@ export const SEED_CATEGORIES = [
   {
     slug: 'fruiting',
     name: 'Fruiting Veggies',
-    description: 'Vine-ripened natural natural vegetables.',
+    description: 'Vine-ripened 100% chemical-free & pesticide-free vegetables.',
     image: '/images/products/ringan.jpeg',
   },
   {
     slug: 'fruits',
     name: 'Fresh Fruits',
-    description: 'Sun-ripened natural fruits from the Kamana farm.',
+    description: 'Sun-ripened 100% chemical-free & pesticide-free fruits from the Kamana farm.',
     image: '/images/products/papaya.jpeg',
   },
 ] as const;

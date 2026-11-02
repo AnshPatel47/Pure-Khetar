@@ -27,7 +27,7 @@ export function Logo({ tone = 'dark', showTagline = false, className, size = 'md
         style={{ width: logoSize, height: logoSize }}
       >
         <Image
-          src="/icons/brand/Logo.jpeg"
+          src="/icons/brand/Pure Khetar Nature Logo.png"
           alt="Pure Khetar logo"
           fill
           sizes="48px"

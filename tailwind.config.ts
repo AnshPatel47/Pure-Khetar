@@ -33,8 +33,8 @@ const config: Config = {
           "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%)",
       },
       boxShadow: {
-        "organic":    "0 8px 32px rgba(31,77,46,0.12)",
-        "organic-lg": "0 20px 60px rgba(31,77,46,0.18)",
+        "natural":    "0 8px 32px rgba(31,77,46,0.12)",
+        "natural-lg": "0 20px 60px rgba(31,77,46,0.18)",
         "glow-gold":  "0 0 30px rgba(224,165,40,0.35)",
         "glow-green": "0 0 30px rgba(31,77,46,0.3)",
         "card":       "0 2px 16px rgba(31,77,46,0.08), 0 1px 4px rgba(31,77,46,0.06)",

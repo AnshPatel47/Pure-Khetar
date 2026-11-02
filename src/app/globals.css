@@ -153,6 +153,12 @@ body {
 .animate-float-slow { animation: float 9s ease-in-out infinite; }
 .animate-pulse-ring { animation: pulse-ring 2.5s cubic-bezier(0.455,0.03,0.515,0.955) infinite; }
 
+.farm-marquee { animation: farm-marquee 32s linear infinite; }
+.farm-marquee:hover { animation-play-state: paused; }
+@keyframes farm-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 
 /* ─── Accessibility: respect "reduce motion" ─────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

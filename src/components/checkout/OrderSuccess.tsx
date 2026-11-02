@@ -19,7 +19,7 @@ export function OrderSuccess({ orderId, total }: { orderId: string; total: numbe
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
-        className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-forest shadow-organic-lg"
+        className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-forest shadow-natural-lg"
       >
         <Check className="h-10 w-10 text-cream" aria-hidden />
       </motion.div>

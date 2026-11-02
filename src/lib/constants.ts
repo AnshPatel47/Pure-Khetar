@@ -18,7 +18,7 @@ export const CONTACT = {
   phoneDisplay: '+91 83200 19977',
   /** Digits only, with country code — used for wa.me and tel: links */
   phoneE164: '918320019977',
-  email: 'hello@purekhetar.com',
+  email: 'pureKhetar@gmail.com',
   location: 'Kamana, Visnagar, Mehsana, Gujarat, India',
 } as const;
 
