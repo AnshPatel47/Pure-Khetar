@@ -13,8 +13,8 @@ export const TIMELINE = [
   },
   {
     year: '1985',
-    title: 'First Gir Cows Arrive',
-    desc: "The farm welcomes its first Gir cows. Their A2 dung becomes the cornerstone of Kamana's Vedic composting system — replacing all chemical inputs.",
+    title: 'First Farm Cows Arrive',
+    desc: "The farm welcomes its first cows. Their dung becomes the cornerstone of Kamana's Vedic composting system — replacing all chemical inputs.",
     icon: '🐄',
     side: 'right' as const,
     color: 'bg-marigold/10 border-marigold/30',
@@ -37,22 +37,22 @@ export const TIMELINE = [
   },
   {
     year: '2011',
-    title: 'PGS Natural Certification',
-    desc: 'Kamana Farm receives PGS Natural India certification — formally recognising 40 years of chemical-free farming. The first in Kamana village.',
+    title: 'Tradition Meets Today',
+    desc: 'Kamana Farm continues four decades of pesticide-free farming with careful, hands-on cultivation for the village community.',
     icon: '🏅',
     side: 'left' as const,
     color: 'bg-emerald-50 border-emerald-200',
   },
   {
     year: '2019',
-    title: 'Lab Testing Program',
-    desc: 'Ansh R. introduces the independent NABL lab testing program. Every harvest batch tested for 80+ residues — published publicly as a transparency commitment.',
+    title: 'Stronger Farm Standards',
+    desc: 'Ansh R. introduces careful harvest inspections and transparent growing practices across the farm for consistent freshness.',
     icon: '🔬',
     side: 'right' as const,
     color: 'bg-terracotta/10 border-terracotta/30',
   },
   {
-    year: '2023',
+    year: '2026',
     title: 'Pure Khetar Launches',
     desc: "Three generations unite to launch Pure Khetar — bringing Kamana's morning harvest directly to families across Gujarat with guaranteed freshness.",
     icon: '🚀',
@@ -73,7 +73,7 @@ export const TIMELINE = [
 /* ─── Milestone pillars ─────────────────────────────────────────────── */
 export const MILESTONES = [
   { icon: React.createElement(Droplets, { className: 'w-5 h-5' }), stat: '60%', label: 'Less Water Used', sub: 'vs traditional methods' },
-  { icon: React.createElement(Award, { className: 'w-5 h-5' }), stat: '15+', label: 'Certifications', sub: 'over 50 years' },
-  { icon: React.createElement(TreePine, { className: 'w-5 h-5' }), stat: '5→15', label: 'Acres Cultivated', sub: 'natural growth' },
-  { icon: React.createElement(FlaskConical, { className: 'w-5 h-5' }), stat: '0ppm', label: 'Pesticide Residue', sub: 'in every test' },
+  { icon: React.createElement(Award, { className: 'w-5 h-5' }), stat: '50+', label: 'Years of Farming', sub: 'across generations' },
+  { icon: React.createElement(TreePine, { className: 'w-5 h-5' }), stat: '5→15', label: 'Acres Cultivated', sub: 'steady growth' },
+  { icon: React.createElement(FlaskConical, { className: 'w-5 h-5' }), stat: '0', label: 'Synthetic Pesticides', sub: 'used in growing' },
 ];

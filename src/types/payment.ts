@@ -4,4 +4,6 @@ export interface PaymentIntent {
   amount: number;
   status: 'PENDING' | 'COMPLETED' | 'FAILED' | 'EXPIRED';
   expiresAt: string;
+  razorpayKeyId?: string;
+  razorpayOrderId?: string;
 }

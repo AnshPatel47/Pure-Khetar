@@ -27,7 +27,7 @@ export function QualityImage() {
             <ShieldCheck className="w-5 h-5 text-cream" />
           </div>
           <div>
-            <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wide">Batch Certified</p>
+            <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wide">Fresh Harvest</p>
             <p className="text-sm font-bold text-forest">0ppm Pesticides</p>
           </div>
         </motion.div>

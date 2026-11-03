@@ -8,9 +8,9 @@ const TRUST_ITEMS = [
   { icon: <Sprout className="w-4 h-4" />, text: '0% Chemicals', sub: 'Lab Verified' },
   { icon: <Truck className="w-4 h-4" />, text: 'Morning Delivery', sub: 'Before 9 AM' },
   { icon: <ShieldCheck className="w-4 h-4" />, text: 'Freshness Guarantee', sub: 'Or Full Refund' },
-  { icon: <Award className="w-4 h-4" />, text: 'PGS Certified', sub: 'Since 2011' },
+  { icon: <Award className="w-4 h-4" />, text: '50+ Years Legacy', sub: 'Kamana Farm' },
   { icon: <Clock className="w-4 h-4" />, text: '12h Harvest→Door', sub: 'Same Day' },
-  { icon: <Leaf className="w-4 h-4" />, text: 'A2 Vedic Manure', sub: 'Gir Cow Nourished' },
+  { icon: <Leaf className="w-4 h-4" />, text: 'Vedic Manure', sub: 'Farm Nourished' },
 ];
 
 export function TrustStrip() {

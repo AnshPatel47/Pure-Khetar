@@ -4,7 +4,7 @@ import { NetHouseIntro } from './NetHouseIntro';
 import { FarmPracticesGrid } from './FarmPracticesGrid';
 import { DairyVideoSection } from './DairyVideoSection';
 import { WaterConservationSection } from './WaterConservationSection';
-import { LabCertificationsSection } from './LabCertificationsSection';
+import { FarmHighlightsSection } from './FarmHighlightsSection';
 import { FarmCTA } from './FarmCTA';
 
 export default function OurFarmPage() {
@@ -16,7 +16,7 @@ export default function OurFarmPage() {
       <FarmPracticesGrid />
       <DairyVideoSection />
       <WaterConservationSection />
-      <LabCertificationsSection />
+      <FarmHighlightsSection />
       <FarmCTA />
     </div>
   );

@@ -48,30 +48,4 @@ export const SEED_PRODUCTS = [
     isFeatured: true,
     categorySlug: 'fruits',
   },
-  {
-    slug: 'fresh-dudhi',
-    name: 'Fresh Dudhi (Bottle Gourd)',
-    description:
-      'Farm-fresh bottle gourd harvested daily at Kamana. Light, nutritious and grown without any chemicals or synthetic fertilizers. Market rate: ₹25–40/kg.',
-    price: 30,
-    unit: 'kg',
-    stock: 90,
-    images: ['/images/farm/plant.jpeg', '/images/farm/farmPic.jpeg'],
-    isChemicalFree: true,
-    isFeatured: true,
-    categorySlug: 'vegetables',
-  },
-  {
-    slug: 'baby-eggplant',
-    name: 'Baby Eggplant (Small Ringan)',
-    description:
-      'Tender young eggplants with a mild, delicate flavour — perfect for bharta or sabzi. Hand-picked each morning from our net-house rows. Market rate: ₹45–65/kg.',
-    price: 48,
-    unit: 'kg',
-    stock: 75,
-    images: ['/images/farm/baby-eggplant.jpeg', '/images/farm/babyEggplant.jpeg.jpeg'],
-    isChemicalFree: true,
-    isFeatured: false,
-    categorySlug: 'fruiting',
-  },
 ] as const;

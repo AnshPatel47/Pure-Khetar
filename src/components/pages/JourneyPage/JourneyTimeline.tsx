@@ -1,69 +1,67 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Sprout } from 'lucide-react';
+import { ArrowDown, Sprout } from 'lucide-react';
 import { Reveal } from '@/components/ui/Reveal';
-import { TIMELINE } from './data';
+
+const PROCESS_STEPS = [
+  { number: '01', title: 'Ready the Farm', gujarati: 'ખેતર તૈયાર', description: 'Prepare healthy soil, clean beds, water lines, and protected net-house rows.', image: '/images/farm/nethouse-farming.jpeg' },
+  { number: '02', title: 'Sow the Seeds', gujarati: 'બિયારણ વાવવું', description: 'Selected seeds are sown carefully and nurtured from the first day.', image: '/images/farm/plant.jpeg' },
+  { number: '03', title: 'Watch It Grow', gujarati: 'ઉગવણી અને કાળજી', description: 'Plants grow with steady water, natural manure, and daily hands-on farm care.', image: '/images/farm/baby-eggplant.jpeg' },
+  { number: '04', title: 'Morning Harvest', gujarati: 'સવારનું પાક', description: 'Fresh produce is picked at sunrise, checked, and delivered without delay.', image: '/images/products/ringan.jpeg' },
+];
 
 export function JourneyTimeline() {
   return (
-    <section className="py-20 lg:py-32">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Reveal className="text-center mb-16">
-          <p className="inline-flex items-center gap-1.5 text-xs font-bold text-terracotta uppercase tracking-widest mb-3">
-            <Sprout className="w-3.5 h-3.5" />
-            Our Story
+    <section className="relative overflow-hidden py-20 lg:py-28">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <Reveal className="mb-14 text-center">
+          <p className="mb-3 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-terracotta">
+            <Sprout className="h-3.5 w-3.5" /> Live farm process
           </p>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-forest">
-            Roots That Run Deep
-          </h2>
-          <p className="text-gray-600 mt-3 max-w-xl mx-auto text-sm">
-            Every milestone is a chapter in a story of stubbornness, love for the land, and an
-            unwavering belief that nature always knows best.
-          </p>
+          <h2 className="font-serif text-3xl font-bold text-forest sm:text-4xl">From Soil to Sunrise</h2>
+          <p className="mx-auto mt-3 max-w-xl text-sm text-gray-600">Follow one crop through every important stage — from the first prepared bed to the morning harvest.</p>
         </Reveal>
 
         <div className="relative">
-          {/* Central line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-sage/40 to-transparent hidden md:block" />
+          <div className="absolute bottom-10 left-[31px] top-10 hidden w-px bg-sage/20 md:block md:left-1/2">
+            <motion.div
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 3.5, ease: 'easeInOut' }}
+              className="absolute inset-x-0 top-0 h-full origin-top bg-gradient-to-b from-marigold via-sage to-forest"
+            />
+          </div>
 
-          <div className="space-y-8 md:space-y-12">
-            {TIMELINE.map((item, i) => {
-              const isLeft = item.side === 'left';
-              return (
-                <Reveal key={item.year} delay={i * 0.06}>
-                  <div className={`flex flex-col md:flex-row items-start gap-4 md:gap-8 ${isLeft ? '' : 'md:flex-row-reverse'}`}>
-                    {/* Content card */}
-                    <div className={`flex-1 ${isLeft ? 'md:text-right' : 'md:text-left'}`}>
-                      <div className={`bg-white rounded-3xl p-6 border ${item.color} shadow-card card-hover ${item.active ? 'ring-2 ring-marigold/40' : ''}`}>
-                        <div className={`flex items-center gap-3 mb-3 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
-                          <span className="text-2xl">{item.icon}</span>
-                          <span className={`font-serif text-sm font-bold px-3 py-1 rounded-full ${item.active ? 'bg-marigold text-white' : 'bg-forest/8 text-forest'}`}>
-                            {item.year}
-                          </span>
-                        </div>
-                        <h3 className="font-serif text-lg font-bold text-forest mb-2">{item.title}</h3>
-                        <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
-                      </div>
-                    </div>
-
-                    {/* Center dot */}
-                    <div className="hidden md:flex w-10 flex-shrink-0 items-center justify-center mt-6">
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.2 }}
-                        className={`w-4 h-4 rounded-full border-2 border-white shadow-md ${item.active ? 'bg-marigold' : 'bg-sage'}`}
-                      />
-                    </div>
-
-                    {/* Spacer */}
-                    <div className="flex-1 hidden md:block" />
+          <div className="space-y-6 md:space-y-10">
+            {PROCESS_STEPS.map((step, index) => (
+              <Reveal key={step.number} delay={index * 0.12}>
+                <motion.article
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.6, delay: index * 0.08 }}
+                  className={`relative grid items-center gap-6 rounded-2xl border border-sage/15 bg-white p-4 shadow-card md:grid-cols-2 md:p-5 ${index % 2 ? 'md:[direction:rtl]' : ''}`}
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-sage/10 md:[direction:ltr]">
+                    <Image src={step.image} alt={step.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 hover:scale-[1.03]" />
+                    <span className="absolute left-3 top-3 rounded-full bg-cream/95 px-3 py-1 text-xs font-bold text-forest shadow-sm">{step.number}</span>
                   </div>
-                </Reveal>
-              );
-            })}
+                  <div className="px-2 py-2 md:[direction:ltr]">
+                    <p className="text-xs font-bold uppercase tracking-widest text-sage">{step.gujarati}</p>
+                    <h3 className="mt-2 font-serif text-2xl font-bold text-forest">{step.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-gray-600">{step.description}</p>
+                  </div>
+                  {index < PROCESS_STEPS.length - 1 && (
+                    <div className="absolute -bottom-10 left-[31px] z-10 hidden md:block md:left-1/2 md:-translate-x-1/2">
+                      <ArrowDown className="h-5 w-5 text-marigold" />
+                    </div>
+                  )}
+                </motion.article>
+              </Reveal>
+            ))}
           </div>
         </div>
       </div>

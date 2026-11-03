@@ -5,6 +5,12 @@ import { Clock3, QrCode } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import type { PaymentIntent } from '@/types/payment';
 
+declare global {
+  interface Window {
+    Razorpay?: new (options: Record<string, unknown>) => { open: () => void };
+  }
+}
+
 interface Props {
   intent: PaymentIntent;
   onCompleted?: () => void;
@@ -56,6 +62,39 @@ export function UpiPaymentPanel({ intent, onCompleted, onExpired }: Props) {
     return `upi://pay?${params.toString()}`;
   }, [intent.amount, intent.tr, merchantVpa]);
 
+  const launchRazorpay = async () => {
+    if (expired || !intent.razorpayKeyId || !intent.razorpayOrderId || !window.Razorpay) {
+      if (!document.querySelector('script[data-razorpay-checkout]')) {
+        const script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.async = true;
+        script.dataset.razorpayCheckout = 'true';
+        script.onload = () => void launchRazorpay();
+        document.body.appendChild(script);
+      }
+      return;
+    }
+
+    const checkout = new window.Razorpay({
+      key: intent.razorpayKeyId,
+      amount: Math.round(intent.amount * 100),
+      currency: 'INR',
+      name: 'Pure Khetar',
+      description: 'Farm-fresh produce order',
+      order_id: intent.razorpayOrderId,
+      theme: { color: '#1F4D2E' },
+      handler: async (response: Record<string, string>) => {
+        const verified = await fetch('/api/verify-razorpay-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tr: intent.tr, ...response }),
+        });
+        if (verified.ok) onCompleted?.();
+      },
+    });
+    checkout.open();
+  };
+
   const launchApp = () => {
     if (expired || !upiUrl) return;
     if (!mobile) {
@@ -82,10 +121,14 @@ export function UpiPaymentPanel({ intent, onCompleted, onExpired }: Props) {
       </div>
 
       {!merchantVpa && <div className="mt-3 rounded-xl bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">Payment is not configured. Set NEXT_PUBLIC_UPI_VPA to the verified merchant UPI ID.</div>}
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <button type="button" onClick={launchApp} disabled={!merchantVpa} className="rounded-xl bg-forest px-4 py-3 text-sm font-bold text-cream disabled:cursor-not-allowed disabled:opacity-50">Pay via Google Pay</button>
-        <button type="button" onClick={launchApp} disabled={!merchantVpa} className="rounded-xl bg-[#5f259f] px-4 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50">Pay via PhonePe</button>
-      </div>
+      {intent.razorpayKeyId && intent.razorpayOrderId ? (
+        <button type="button" onClick={() => void launchRazorpay()} className="mt-4 w-full rounded-xl bg-forest px-4 py-3 text-sm font-bold text-cream transition-colors hover:bg-forest-l">Pay securely with Razorpay</button>
+      ) : (
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <button type="button" onClick={launchApp} disabled={!merchantVpa} className="rounded-xl bg-forest px-4 py-3 text-sm font-bold text-cream disabled:cursor-not-allowed disabled:opacity-50">Pay via Google Pay</button>
+          <button type="button" onClick={launchApp} disabled={!merchantVpa} className="rounded-xl bg-[#5f259f] px-4 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50">Pay via PhonePe</button>
+        </div>
+      )}
 
       {!mobile && (
         <div id="upi-desktop-message" className="mt-4 flex items-center gap-3 rounded-xl border border-sage/20 bg-white p-3">

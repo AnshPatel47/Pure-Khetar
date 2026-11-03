@@ -83,7 +83,7 @@ export const FARM_VIDEOS: FarmVideo[] = [
     id: 'tabelo',
     src: '/videos/tabelo.mp4',
     title: 'The tabelo (barn)',
-    caption: 'Our Gir cows at the tabelo — the source of our A2 Vedic manure.',
+    caption: 'Our cows at the tabelo — the source of our Vedic manure.',
   },
   {
     id: 'veges-farm',

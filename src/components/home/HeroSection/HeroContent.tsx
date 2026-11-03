@@ -32,7 +32,7 @@ export function HeroContent() {
       {/* Headline */}
       <motion.h1
         {...fadeUp(0.15)}
-        className="font-serif text-[2.35rem] sm:text-5xl lg:text-[4rem] font-bold text-forest leading-[1.08] drop-shadow-sm"
+        className="font-serif text-[2rem] sm:text-[2.75rem] lg:text-[3.25rem] font-bold text-forest leading-[1.08] drop-shadow-sm"
       >
         ROOTED IN NATURE,
         <br />
@@ -41,7 +41,7 @@ export function HeroContent() {
 
       {/* Subtitle */}
       <motion.p {...fadeUp(0.3)} className="text-base sm:text-lg text-forest/75 leading-relaxed font-light max-w-lg">
-        Nourished with Gir Cow A2 Vedic manure and harvested daily at sunrise.
+        Nourished with Vedic manure and harvested daily at sunrise.
         Delivered straight to your doorstep — guaranteed purity, every morning.
       </motion.p>
 

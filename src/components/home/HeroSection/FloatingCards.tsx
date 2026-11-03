@@ -46,7 +46,7 @@ export function HeroFloatingCards() {
       <FloatingCard
         icon={<ShieldCheck className="w-5 h-5" />}
         label="Verified Quality"
-        value="100% Lab Tested Pure"
+        value="100% Chemical-Free"
         delay={0.5}
         className="animate-float"
       />

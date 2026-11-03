@@ -25,7 +25,7 @@ export const NAV_ITEMS: NavItem[] = [
 export const ANNOUNCEMENTS = [
   `🌿 Free delivery on orders above ₹${COMMERCE.freeDeliveryThreshold} — straight from our Kamana farm`,
   '🧺 Morning harvest window: 5 AM – 7 AM daily',
-  '✅ Lab-tested produce — reports on our farm page',
+  '✅ Carefully checked produce — packed fresh each morning',
   '🐄 Nourished with natural cow-dung manure',
 ];
 

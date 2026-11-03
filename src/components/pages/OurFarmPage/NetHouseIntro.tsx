@@ -49,8 +49,8 @@ export function NetHouseIntro() {
                 <ShieldCheck className="w-5 h-5 text-forest" />
               </div>
               <div>
-                <p className="text-xs text-gray-500">Certified Since</p>
-                <p className="text-sm font-bold text-forest">2011 PGS Certification</p>
+                <p className="text-xs text-gray-500">Farm Legacy</p>
+                <p className="text-sm font-bold text-forest">Growing Since 1972</p>
               </div>
             </div>
           </div>

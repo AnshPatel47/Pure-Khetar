@@ -66,7 +66,7 @@ export function Footer() {
 
           {/* Brand column */}
           <div className="col-span-2">
-            <Logo  showTagline className="mb-5" />
+            <Logo className="mb-5" />
             <p className="text-forest/60 text-sm leading-relaxed mb-6 max-w-xs">
               Directly from Patel Sureshbhai&apos;s family farm in Kamana, Gujarat. 50+ years of 
               Vedic farming — zero chemicals, maximum purity.

@@ -1,6 +1,7 @@
 import { unstable_cache } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import type { CategorySummary } from '@/types/category';
+import { LIVE_PRODUCT_SLUGS } from './product.service';
 
 export const CATEGORY_CACHE_TAG = 'categories';
 
@@ -14,11 +15,13 @@ export const getCategories = unstable_cache(
         name: true,
         description: true,
         image: true,
-        _count: { select: { products: true } },
+        products: { where: { slug: { in: [...LIVE_PRODUCT_SLUGS] } }, select: { id: true } },
       },
     });
 
-    return categories.map(({ _count, ...category }) => ({ ...category, productCount: _count.products }));
+    return categories
+      .map(({ products, ...category }) => ({ ...category, productCount: products.length }))
+      .filter((category) => category.productCount > 0);
   },
   ['categories:all'],
   { revalidate: 300, tags: [CATEGORY_CACHE_TAG] },

@@ -4,15 +4,15 @@ import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CERTS } from './data';
 
-export function LabCertificationsSection() {
+export function FarmHighlightsSection() {
   return (
     <section id="lab-reports" className="py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <SectionHeading
             eyebrow="Transparency & Trust"
-            title={<>Every Claim,<br /><span className="text-terracotta">Lab Verified</span></>}
-            subtitle="We believe transparency is non-negotiable. Every batch of produce is sent to NABL-accredited labs before it reaches your kitchen."
+            title={<>Harvested Fresh,<br /><span className="text-terracotta">Handled with Care</span></>}
+            subtitle="We keep our growing and packing standards simple, transparent, and focused on freshness."
             center
           />
         </div>
@@ -37,7 +37,7 @@ export function LabCertificationsSection() {
               href="/contact"
               className="inline-flex items-center gap-2 border border-forest/30 text-forest px-6 py-3.5 rounded-full font-semibold text-sm hover:bg-forest hover:text-cream transition-all duration-300"
             >
-              Request Full Lab Reports
+              Ask About Our Farming Practices
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

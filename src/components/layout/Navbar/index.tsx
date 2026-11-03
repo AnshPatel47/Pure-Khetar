@@ -78,29 +78,30 @@ export function Navbar() {
           layout
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className={cn(
-            'mx-auto w-full max-w-[1280px] transition-all duration-500 ease-in-out',
+            'mx-auto w-full transition-all duration-500 ease-in-out',
             scrolled
               ? [
-                  'rounded-[999px] overflow-hidden',
-                  'border border-[#efe8d6]',
-                  'bg-[#fffdf7]/96 backdrop-blur-2xl',
-                  'shadow-[0_10px_32px_rgba(52,67,43,0.14),0_2px_12px_rgba(231,218,181,0.4)]',
+                  'max-w-[1280px]',
+                  'rounded-none overflow-hidden',
+                  'border border-forest/10',
+                  'bg-[#fffdf7]/95 backdrop-blur-xl',
+                  'shadow-[0_6px_18px_rgba(52,67,43,0.10),0_1px_4px_rgba(231,218,181,0.22)]',
                 ]
               : [
-                  // Fully transparent — hero photo shows through
-                  'rounded-none border-transparent bg-transparent',
+                  'rounded-none border-b border-forest/15 bg-[#fffdf7]/78 backdrop-blur-md',
+                  'shadow-[0_4px_14px_rgba(31,77,46,0.16),0_1px_0_rgba(255,255,255,0.55)_inset]',
                 ],
           )}
         >
           <Container className="relative z-10">
-            {/* Height: 96px at top → 64px after scroll */}
+            {/* Compact square rail when scrolled */}
             <div
               className={cn(
                 'flex items-center justify-between gap-4 transition-all duration-500',
-                scrolled ? 'h-[64px]' : 'h-[96px]',
+                scrolled ? 'h-[72px]' : 'h-[80px]',
               )}
             >
-              <Logo tone={scrolled ? 'dark' : 'light'} showTagline={!scrolled} size={scrolled ? 'sm' : 'md'} />
+              <Logo size={scrolled ? 'sm' : 'md'} />
 
               <NavLinks scrolled={scrolled} />
 
@@ -115,7 +116,7 @@ export function Navbar() {
                     'flex items-center gap-2 rounded-full p-2.5 transition-colors',
                     scrolled
                       ? 'text-forest/70 hover:bg-forest/5 hover:text-forest lg:border lg:border-sage/25 lg:px-3.5 lg:py-2'
-                      : 'text-cream/85 hover:text-cream',
+                      : 'text-forest/80 hover:bg-white/60 hover:text-forest lg:border lg:border-forest/10 lg:px-3.5 lg:py-2',
                   )}
                 >
                   <Search className="h-[18px] w-[18px]" />
@@ -170,7 +171,7 @@ export function Navbar() {
                   aria-expanded={menuOpen}
                   className={cn(
                     'rounded-xl p-2.5 transition-colors md:hidden',
-                    scrolled ? 'text-forest hover:bg-forest/5' : 'text-cream hover:text-cream/80',
+                    scrolled ? 'text-forest hover:bg-forest/5' : 'text-forest hover:bg-white/60',
                   )}
                 >
                   <Menu className="h-5 w-5" />

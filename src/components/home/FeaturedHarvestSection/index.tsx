@@ -8,8 +8,8 @@ const FALLBACK_PRODUCTS = [
   {
     id: 'f1',
     slug: 'f1',
-    name: 'Natural Ringan (Baby Eggplant)',
-    description: 'Tender baby eggplants grown in net-house, nourished with A2 Vedic manure. Zero pesticides.',
+    name: 'Natural Ringan (Eggplant)',
+    description: 'Tender eggplants grown in net-house with careful natural farming practices. Zero pesticides.',
     price: 60,
     unit: 'kg',
     stock: 0,
@@ -27,20 +27,20 @@ const FALLBACK_PRODUCTS = [
   },
   {
     id: 'f3',
-    slug: 'f3',
-    name: 'Farm Fresh Baby Eggplant',
-    description: 'Plump, glossy baby eggplants. Perfect for Gujarati curries. Delivered same morning.',
+    slug: 'natural-papaya',
+    name: 'Natural Papaya (Papita)',
+    description: 'Sweet, sun-ripened papaya from our Kamana farm. Delivered fresh each morning.',
     price: 55,
     unit: 'kg',
     stock: 0,
-    images: ['/images/products/baby-eggplant.jpeg'],
+    images: ['/images/products/papaya.jpeg'],
   },
 ];
 
 async function getProducts() {
   try {
     const { prisma } = await import('@/lib/prisma');
-    const products = await prisma.product.findMany({ take: 4, orderBy: { createdAt: 'desc' } });
+    const products = await prisma.product.findMany({ where: { slug: { in: ['natural-ringan', 'fresh-fulawar', 'natural-papaya'] } }, take: 3, orderBy: { createdAt: 'desc' } });
     return products.length > 0 ? products : FALLBACK_PRODUCTS;
   } catch {
     return FALLBACK_PRODUCTS;

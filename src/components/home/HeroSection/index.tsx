@@ -39,11 +39,11 @@ export function HeroSection() {
           className="absolute inset-0"
         >
           <Image
-            src="/images/farm/classic-watering.jpeg"
+            src="/images/farm/watering.jpeg"
             alt="Pure Khetar — classic channel irrigation at Kamana, Gujarat"
             fill
             priority
-            quality={80}
+            quality={90}
             sizes="100vw"
             placeholder="blur"
             blurDataURL={BLUR_DATA_URL}
@@ -59,15 +59,15 @@ export function HeroSection() {
         className="absolute inset-0 z-10 pointer-events-none"
         style={{
           background:
-            'linear-gradient(to right, rgba(250,246,236,0.96) 0%, rgba(250,246,236,0.86) 38%, rgba(250,246,236,0.50) 58%, transparent 78%)',
+            'linear-gradient(to right, rgba(250,246,236,0.82) 0%, rgba(250,246,236,0.62) 32%, rgba(250,246,236,0.28) 50%, transparent 68%)',
         }}
       />
       {/* Bottom vignette so the stats bar floats over clearly */}
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 h-48 z-10 pointer-events-none"
+        className="absolute inset-x-0 bottom-0 h-32 z-10 pointer-events-none"
         style={{
-          background: 'linear-gradient(to top, rgba(250,246,236,1) 0%, rgba(250,246,236,0.5) 40%, transparent 100%)',
+          background: 'linear-gradient(to top, rgba(250,246,236,0.9) 0%, rgba(250,246,236,0.28) 24%, transparent 48%)',
         }}
       />
       {/* Subtle noise grain */}

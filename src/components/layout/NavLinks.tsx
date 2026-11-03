@@ -65,7 +65,7 @@ export function NavLinks({ scrolled = true }: NavLinksProps) {
                   aria-current={active ? 'page' : undefined}
                   className={cn(
                     // Base styles
-                    'relative flex items-center rounded-lg py-2.5 text-[13px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest',
+                    'group relative flex items-center rounded-lg py-2.5 text-[13px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest',
                     hasMenu ? 'pl-3.5 pr-1' : 'px-3.5',
                     // Transparent navbar: text is cream; after scroll: forest
                     scrolled
@@ -73,12 +73,19 @@ export function NavLinks({ scrolled = true }: NavLinksProps) {
                         ? 'text-forest'
                         : 'text-forest/70 hover:text-forest'
                       : active
-                        ? 'text-cream'
-                        : 'text-cream/80 hover:text-cream',
+                        ? 'text-forest'
+                        : 'text-forest/80 hover:text-forest',
                     // NO hover underline — only a subtle text colour lift
                   )}
                 >
                   {item.label}
+
+                  {!active && (
+                    <motion.span
+                      className="absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full bg-sage transition-transform duration-300 ease-out group-hover:scale-x-100"
+                      aria-hidden
+                    />
+                  )}
 
                   {/* Badge (e.g. "New") */}
                   {item.badge && (
@@ -109,7 +116,7 @@ export function NavLinks({ scrolled = true }: NavLinksProps) {
                     onClick={() => (expanded ? setOpenLabel(null) : open(item.label))}
                     className={cn(
                       'rounded-xl py-2.5 pl-0.5 pr-2.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest',
-                      scrolled ? 'text-forest/60' : 'text-cream/70',
+                      scrolled ? 'text-forest/60' : 'text-forest/70 hover:text-forest',
                     )}
                   >
                     <ChevronDown className={cn('h-3.5 w-3.5 transition-transform duration-200', expanded && 'rotate-180')} />

@@ -1,4 +1,4 @@
-import { Wind, Droplets, Sun, TreePine, FlaskConical, Award } from 'lucide-react';
+import { Wind, Droplets, Sun, TreePine, FlaskConical } from 'lucide-react';
 import React from 'react';
 
 /* ─── Feature Grid Data ─────────────────────────────────────────────── */
@@ -18,7 +18,7 @@ export const FEATURES = [
   {
     icon: React.createElement(Sun, { className: 'w-5 h-5' }),
     title: 'Vedic A2 Manure',
-    desc: 'Gir Cow A2 dung compost enriches our soil with natural probiotics, replacing synthetic fertilizers entirely — a 50-year tradition.',
+    desc: 'Cow dung compost enriches our soil with natural probiotics, replacing synthetic fertilizers entirely — a 50-year tradition.',
     color: 'bg-marigold/10 text-marigold',
   },
   {
@@ -29,22 +29,16 @@ export const FEATURES = [
   },
   {
     icon: React.createElement(FlaskConical, { className: 'w-5 h-5' }),
-    title: 'Independent Lab Testing',
-    desc: 'Every batch is tested at NABL-accredited labs for 80+ pesticide residues. Reports are publicly available — zero secrets, zero shortcuts.',
+    title: 'Harvest Quality Checks',
+    desc: 'We inspect each harvest by hand so produce arrives fresh, clean, and ready for your kitchen.',
     color: 'bg-terracotta/10 text-terracotta',
-  },
-  {
-    icon: React.createElement(Award, { className: 'w-5 h-5' }),
-    title: 'PGS Natural Certified',
-    desc: "Certified under India's Participatory Guarantee System — the gold standard in grassroots natural certification since 2011.",
-    color: 'bg-emerald-50 text-emerald-600',
   },
 ];
 
-/* ─── Certification Badges ─────────────────────────────────────────── */
+/* ─── Farm Highlights ────────────────────────────────────────────── */
 export const CERTS = [
-  { label: 'PGS Natural India', year: '2011–Present' },
-  { label: 'NABL Lab Tested', year: 'Every Harvest' },
-  { label: 'Zero Pesticide', year: 'Batch Verified' },
-  { label: 'A2 Vedic Certified', year: 'Gir Cow Manure' },
+  { label: 'Morning Harvest', year: 'Daily' },
+  { label: 'Chemical-Free Practices', year: 'Every Crop' },
+  { label: 'Pesticide-Free Growing', year: 'Season to Season' },
+  { label: 'Vedic Manure', year: 'Cow Manure Compost' },
 ];

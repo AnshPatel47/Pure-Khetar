@@ -44,7 +44,7 @@ export function AuthShell({ title, switchText, switchLabel, switchHref, headline
         </div>
 
         <div className="relative z-10 p-10">
-          <Logo tone="light" />
+          <Logo />
         </div>
 
         <div className="relative z-10 space-y-6 p-10">

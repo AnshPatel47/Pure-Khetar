@@ -7,9 +7,9 @@ import { Reveal } from '@/components/ui/Reveal';
 
 const QUALITY_POINTS = [
   { icon: <Wind className="w-5 h-5" />, title: 'Net-House Farming', desc: '12,000 sq ft protected micro-environment. No pesticides needed.', color: 'text-sage bg-sage/10' },
-  { icon: <FlaskConical className="w-5 h-5" />, title: 'NABL Lab Certified', desc: 'Every batch tested for 80+ residues. Results published publicly.', color: 'text-terracotta bg-terracotta/10' },
-  { icon: <Leaf className="w-5 h-5" />, title: 'A2 Vedic Manure', desc: 'Gir Cow dung compost — aged 6 months. Zero synthetic fertilizers.', color: 'text-forest bg-forest/8' },
-  { icon: <Award className="w-5 h-5" />, title: 'PGS Certified', desc: "India's most rigorous grassroots natural certification since 2011.", color: 'text-marigold bg-marigold/10' },
+  { icon: <FlaskConical className="w-5 h-5" />, title: 'Careful Harvest Checks', desc: 'Produce is inspected at harvest and packed fresh for each delivery.', color: 'text-terracotta bg-terracotta/10' },
+  { icon: <Leaf className="w-5 h-5" />, title: 'Vedic Manure', desc: 'Cow dung compost — aged 6 months. Zero synthetic fertilizers.', color: 'text-forest bg-forest/8' },
+  { icon: <Award className="w-5 h-5" />, title: '50+ Years of Farming', desc: 'Three generations of hands-on knowledge guide every harvest.', color: 'text-marigold bg-marigold/10' },
 ];
 
 export function QualityContent() {

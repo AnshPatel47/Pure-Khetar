@@ -42,6 +42,30 @@ export async function POST(request: NextRequest) {
     intent = await prisma.paymentIntent.findUniqueOrThrow({ where: { id: intent.id } });
   }
 
+  const razorpayKeyId = process.env.RAZORPAY_KEY_ID?.trim();
+  const razorpayKeySecret = process.env.RAZORPAY_KEY_SECRET?.trim();
+  let razorpayOrderId: string | undefined;
+
+  if (razorpayKeyId && razorpayKeySecret && intent.status === 'PENDING') {
+    const razorpayResponse = await fetch('https://api.razorpay.com/v1/orders', {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${Buffer.from(`${razorpayKeyId}:${razorpayKeySecret}`).toString('base64')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        amount: Math.round(intent.amount * 100),
+        currency: 'INR',
+        receipt: intent.tr,
+        notes: { orderId: intent.orderId, transactionId: intent.tr },
+      }),
+    });
+    if (razorpayResponse.ok) {
+      const razorpayOrder = await razorpayResponse.json() as { id?: string };
+      razorpayOrderId = razorpayOrder.id;
+    }
+  }
+
   return NextResponse.json({
     tr: intent.tr,
     orderId: intent.orderId,
@@ -49,5 +73,7 @@ export async function POST(request: NextRequest) {
     status: intent.status,
     createdAt: intent.createdAt.toISOString(),
     expiresAt: intent.expiresAt.toISOString(),
+    razorpayKeyId: razorpayKeyId || undefined,
+    razorpayOrderId,
   });
 }
