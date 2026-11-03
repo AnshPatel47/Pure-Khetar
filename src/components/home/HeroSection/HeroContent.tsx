@@ -71,9 +71,9 @@ export function HeroContent() {
         transition={{ duration: 1, delay: 0.65 }}
         className="pt-7 border-t border-forest/15"
       >
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 text-xs text-forest/70">
+        <div className="grid grid-cols-2 gap-2 text-xs text-forest sm:grid-cols-4 sm:gap-3">
           {TRUST_PROPS.map(({ icon, text }) => (
-            <div key={text} className="flex items-center gap-2">
+            <div key={text} className="flex items-center gap-2 rounded-md border border-white/70 bg-white/85 px-2.5 py-2 shadow-[0_2px_12px_rgba(31,77,46,0.08)] backdrop-blur-sm">
               {icon}
               <span className="font-medium">{text}</span>
             </div>

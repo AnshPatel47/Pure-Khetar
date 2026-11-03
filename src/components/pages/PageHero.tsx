@@ -27,7 +27,7 @@ export function PageHero({
         alt={bgAlt}
         fill
         priority
-        quality={80}
+        quality={95}
         sizes="100vw"
         placeholder="blur"
         blurDataURL={BLUR_DATA_URL}

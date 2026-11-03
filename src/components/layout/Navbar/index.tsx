@@ -82,7 +82,7 @@ export function Navbar() {
             scrolled
               ? [
                   'max-w-[1280px]',
-                  'rounded-none overflow-hidden',
+                  'rounded-lg overflow-hidden',
                   'border border-forest/10',
                   'bg-[#fffdf7]/95 backdrop-blur-xl',
                   'shadow-[0_6px_18px_rgba(52,67,43,0.10),0_1px_4px_rgba(231,218,181,0.22)]',
@@ -98,7 +98,7 @@ export function Navbar() {
             <div
               className={cn(
                 'flex items-center justify-between gap-4 transition-all duration-500',
-                scrolled ? 'h-[72px]' : 'h-[80px]',
+                scrolled ? 'h-[76px]' : 'h-[84px]',
               )}
             >
               <Logo size={scrolled ? 'sm' : 'md'} />

@@ -55,25 +55,37 @@ function buildWhere({ category, q }: ProductQuery): Prisma.ProductWhereInput {
 
 /** Product list for the shop page. Cached; filters are part of the cache key. */
 export const getProducts = unstable_cache(
-  async (query: ProductQuery = {}): Promise<ProductSummary[]> =>
-    prisma.product.findMany({
-      where: buildWhere(query),
-      orderBy: orderBy(query.sort),
-      take: query.limit ?? 24,
-      select: productSelect,
-    }),
+  async (query: ProductQuery = {}): Promise<ProductSummary[]> => {
+    try {
+      return await prisma.product.findMany({
+        where: buildWhere(query),
+        orderBy: orderBy(query.sort),
+        take: query.limit ?? 24,
+        select: productSelect,
+      });
+    } catch (error) {
+      console.error('[products] Database unavailable while loading the catalog', error);
+      return [];
+    }
+  },
   ['products:list'],
   { revalidate: REVALIDATE_SECONDS, tags: [PRODUCT_CACHE_TAG] },
 );
 
 export const getFeaturedProducts = unstable_cache(
-  async (limit = 4): Promise<ProductSummary[]> =>
-    prisma.product.findMany({
-      where: { isFeatured: true, slug: { in: [...LIVE_PRODUCT_SLUGS] } },
-      orderBy: { createdAt: 'desc' },
-      take: limit,
-      select: productSelect,
-    }),
+  async (limit = 4): Promise<ProductSummary[]> => {
+    try {
+      return await prisma.product.findMany({
+        where: { isFeatured: true, slug: { in: [...LIVE_PRODUCT_SLUGS] } },
+        orderBy: { createdAt: 'desc' },
+        take: limit,
+        select: productSelect,
+      });
+    } catch (error) {
+      console.error('[products] Database unavailable while loading featured products', error);
+      return [];
+    }
+  },
   ['products:featured'],
   { revalidate: REVALIDATE_SECONDS, tags: [PRODUCT_CACHE_TAG] },
 );
@@ -81,7 +93,12 @@ export const getFeaturedProducts = unstable_cache(
 export const getProductBySlug = unstable_cache(
   async (slug: string): Promise<ProductSummary | null> => {
     if (!(LIVE_PRODUCT_SLUGS as readonly string[]).includes(slug)) return null;
-    return prisma.product.findUnique({ where: { slug }, select: productSelect });
+    try {
+      return await prisma.product.findUnique({ where: { slug }, select: productSelect });
+    } catch (error) {
+      console.error(`[products] Database unavailable while loading ${slug}`, error);
+      return null;
+    }
   },
   ['products:by-slug'],
   { revalidate: REVALIDATE_SECONDS, tags: [PRODUCT_CACHE_TAG] },

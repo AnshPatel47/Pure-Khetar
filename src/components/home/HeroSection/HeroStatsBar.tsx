@@ -60,7 +60,7 @@ export function HeroStatsBar() {
       className="absolute bottom-0 left-0 right-0 z-20 pb-6"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid w-full grid-cols-4 items-center gap-2 rounded-2xl border border-sage/20 bg-cream/95 px-3 py-3 shadow-[0_8px_30px_rgba(52,67,43,0.12)] backdrop-blur-md sm:gap-10 sm:px-6">
+        <div className="grid w-full grid-cols-4 items-center gap-2 rounded-none border border-sage/20 bg-cream/95 px-3 py-3 shadow-[0_8px_30px_rgba(52,67,43,0.12)] backdrop-blur-md sm:gap-10 sm:px-6">
           {STATS.map(({ num, suffix, label }, i) => (
             <motion.div
               key={label}

@@ -42,7 +42,7 @@ export const SEED_PRODUCTS = [
       '/images/products/papaya.jpeg',
       '/images/products/papaya2.jpeg',
       '/images/products/papaya3.jpeg',
-      '/images/products/naturalPapayaTree.jpeg',
+      '/images/products/papaya3.jpeg',
     ],
     isChemicalFree: true,
     isFeatured: true,

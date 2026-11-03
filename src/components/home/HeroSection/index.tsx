@@ -1,8 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
 import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import { BLUR_DATA_URL } from '@/lib/constants';
 import { HeroContent } from './HeroContent';
 import { HeroStatsBar } from './HeroStatsBar';
@@ -16,41 +14,21 @@ import { HeroStatsBar } from './HeroStatsBar';
  * - No whole-image dark overlay that kills the sky
  */
 export function HeroSection() {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end start'],
-  });
-
-  const bgY   = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '12%']);
-
   return (
-    <section
-      ref={containerRef}
-      className="relative w-full min-h-screen flex items-center overflow-hidden bg-forest"
-    >
-      {/* ── Background Farm Image with slow parallax ─────────────────── */}
-      <motion.div style={{ y: bgY }} className="absolute inset-0 z-0 scale-105 will-change-transform">
-        <motion.div
-          initial={{ scale: 1.08 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 10, ease: 'easeOut' }}
-          className="absolute inset-0"
-        >
-          <Image
-            src="/images/farm/watering.jpeg"
-            alt="Pure Khetar — classic channel irrigation at Kamana, Gujarat"
-            fill
-            priority
-            quality={90}
-            sizes="100vw"
-            placeholder="blur"
-            blurDataURL={BLUR_DATA_URL}
-            className="object-cover object-center"
-          />
-        </motion.div>
-      </motion.div>
+    <section className="relative flex min-h-screen w-full items-center overflow-hidden bg-cream">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/farm/farmPic.jpeg"
+          alt="Pure Khetar farm at Kamana, Gujarat"
+          fill
+          priority
+          quality={95}
+          sizes="100vw"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL}
+          className="object-cover object-center brightness-[0.78] contrast-[1.04] saturate-[0.92]"
+        />
+      </div>
 
       {/* ── Overlays ─────────────────────────────────────────────────── */}
       {/* Left-side cream gradient — ONLY behind the content, not the whole image */}
@@ -85,12 +63,9 @@ export function HeroSection() {
         pt-[96px]: push content below the transparent navbar (96px tall at top).
         pb-28: leave room for the stats bar above the page body.
       */}
-      <motion.div
-        style={{ y: textY }}
-        className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[96px] pb-32 will-change-transform"
-      >
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[96px] pb-32">
         <HeroContent />
-      </motion.div>
+      </div>
 
       {/* ── Stats row ────────────────────────────────────────────────── */}
       <HeroStatsBar />
