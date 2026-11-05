@@ -20,6 +20,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const parsed = loginSchema.safeParse(raw);
         if (!parsed.success) return null;
 
+        const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+        if (adminEmail && parsed.data.email.trim().toLowerCase() === adminEmail) {
+          const configuredHash = process.env.ADMIN_PASSWORD_HASH;
+          const passwordMatches = configuredHash
+            ? await bcrypt.compare(parsed.data.password, configuredHash)
+            : Boolean(process.env.ADMIN_PASSWORD && parsed.data.password === process.env.ADMIN_PASSWORD);
+          if (passwordMatches) {
+            return { id: 'static-admin', name: 'Pure Khetar Admin', email: adminEmail, role: 'ADMIN' };
+          }
+        }
+
         const user = await getUserByEmail(parsed.data.email);
         const passwordMatches = await bcrypt.compare(parsed.data.password, user?.password ?? DUMMY_HASH);
         if (!user || !passwordMatches) return null;

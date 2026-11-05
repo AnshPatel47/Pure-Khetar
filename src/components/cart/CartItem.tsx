@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import { SmartImage } from '@/components/ui/SmartImage';
 import { formatPrice } from '@/lib/utils';
+import { formatWeight, isWeightUnit, weightLineTotal, WEIGHT_STEP_GRAMS } from '@/lib/weight';
 import type { CartItem as CartItemType } from '@/types/cart';
 
 interface CartItemProps {
@@ -12,7 +13,9 @@ interface CartItemProps {
 }
 
 export function CartItem({ item, onQuantityChange, onRemove, onNavigate }: CartItemProps) {
+  const weightProduct = isWeightUnit(item.unit);
   const atMax = item.quantity >= item.stock;
+  const atMin = weightProduct ? item.quantity <= 250 : item.quantity <= 1;
   const title = (
     <h3 className="truncate font-serif text-sm font-bold text-forest">{item.name}</h3>
   );
@@ -38,18 +41,19 @@ export function CartItem({ item, onQuantityChange, onRemove, onNavigate }: CartI
         <div className="mt-2 inline-flex items-center overflow-hidden rounded-lg border border-sage/25" role="group" aria-label={`Quantity of ${item.name}`}>
           <button
             type="button"
-            onClick={() => onQuantityChange(item.quantity - 1)}
+            onClick={() => onQuantityChange(item.quantity - (weightProduct ? WEIGHT_STEP_GRAMS : 1))}
+            disabled={atMin}
             aria-label={`Decrease quantity of ${item.name}`}
             className="p-1.5 text-forest/70 transition-colors hover:bg-forest/5"
           >
             <Minus className="h-3 w-3" />
           </button>
           <span className="min-w-[1.75rem] text-center text-xs font-bold text-forest" aria-live="polite">
-            {item.quantity}
+            {weightProduct ? formatWeight(item.quantity) : item.quantity}
           </span>
           <button
             type="button"
-            onClick={() => onQuantityChange(item.quantity + 1)}
+            onClick={() => onQuantityChange(item.quantity + (weightProduct ? WEIGHT_STEP_GRAMS : 1))}
             disabled={atMax}
             aria-label={`Increase quantity of ${item.name}`}
             className="p-1.5 text-forest/70 transition-colors hover:bg-forest/5 disabled:cursor-not-allowed disabled:opacity-30"
@@ -60,7 +64,7 @@ export function CartItem({ item, onQuantityChange, onRemove, onNavigate }: CartI
       </div>
 
       <div className="flex flex-col items-end gap-2">
-        <p className="font-serif text-sm font-bold text-forest">{formatPrice(item.price * item.quantity)}</p>
+        <p className="font-serif text-sm font-bold text-forest">{formatPrice(weightProduct ? weightLineTotal(item.price, item.quantity) : item.price * item.quantity)}</p>
         <button
           type="button"
           onClick={onRemove}

@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { SEED_CATEGORIES } from '../src/data/categories';
 import { SEED_PRODUCTS } from '../src/data/products';
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -30,8 +31,24 @@ async function main() {
     const { price, stock, ...descriptive } = product;
     await prisma.product.upsert({
       where: { slug: product.slug },
-      update: { ...descriptive, images: [...images], categoryId },
+      update: { ...descriptive, price, images: [...images], categoryId },
       create: { ...product, images: [...images], categoryId },
+    });
+  }
+
+  await prisma.product.updateMany({ where: { slug: 'natural-papaya' }, data: { comingSoon: true, available: false, deletedAt: null, price: 55 } });
+  await prisma.product.updateMany({ where: { slug: { in: ['natural-ringan', 'natural-deti', 'fresh-fulawar'] } }, data: { available: true, deletedAt: null, comingSoon: false } });
+  await prisma.product.updateMany({ where: { slug: 'baby-eggplant' }, data: { available: false, deletedAt: new Date() } });
+
+  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  if (adminEmail) {
+    const password = process.env.ADMIN_PASSWORD_HASH
+      ? process.env.ADMIN_PASSWORD_HASH
+      : await bcrypt.hash(process.env.ADMIN_PASSWORD || 'ChangeMeNow123!', 12);
+    await prisma.user.upsert({
+      where: { email: adminEmail },
+      update: { role: 'ADMIN', password },
+      create: { name: 'Pure Khetar Admin', email: adminEmail, password, role: 'ADMIN' },
     });
   }
 

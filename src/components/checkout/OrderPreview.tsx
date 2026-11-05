@@ -1,6 +1,7 @@
 import { Sprout, Truck } from 'lucide-react';
 import { SmartImage } from '@/components/ui/SmartImage';
 import { formatPrice } from '@/lib/utils';
+import { formatWeight, isWeightUnit, weightLineTotal } from '@/lib/weight';
 import type { CartItem, CartTotals } from '@/types/cart';
 
 export function OrderPreview({ items, totals }: { items: CartItem[]; totals: CartTotals }) {
@@ -23,10 +24,10 @@ export function OrderPreview({ items, totals }: { items: CartItem[]; totals: Car
               <div className="min-w-0 flex-1">
                 <p className="truncate text-xs font-semibold text-forest">{item.name}</p>
                 <p className="text-[10px] text-forest/50">
-                  × {item.quantity} {item.unit}
+                  × {isWeightUnit(item.unit) ? formatWeight(item.quantity) : `${item.quantity} ${item.unit}`}
                 </p>
               </div>
-              <p className="text-xs font-bold text-forest">{formatPrice(item.price * item.quantity)}</p>
+              <p className="text-xs font-bold text-forest">{formatPrice(isWeightUnit(item.unit) ? weightLineTotal(item.price, item.quantity) : item.price * item.quantity)}</p>
             </li>
           ))}
         </ul>

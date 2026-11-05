@@ -6,6 +6,7 @@ import { Minus, Plus, Trash2 } from 'lucide-react';
 import { SmartImage } from '@/components/ui/SmartImage';
 import { FreeDeliveryProgress } from '@/components/cart/FreeDeliveryProgress';
 import { COMMERCE } from '@/lib/constants';
+import { formatWeight, isWeightUnit, weightLineTotal, WEIGHT_STEP_GRAMS } from '@/lib/weight';
 import { formatPrice } from '@/lib/utils';
 import type { CartTotals } from '@/types/cart';
 
@@ -35,7 +36,10 @@ export function CartItemsList({ items, totals, onUpdateQuantity, onRemoveItem }:
       </div>
       <ul className="divide-y divide-sage/10 px-6">
         <AnimatePresence initial={false}>
-          {items.map((item) => (
+          {items.map((item) => {
+            const weightProduct = isWeightUnit(item.unit);
+            const atMin = weightProduct ? item.quantity <= 250 : item.quantity <= 1;
+            return (
             <motion.li
               key={item.id}
               layout
@@ -64,24 +68,25 @@ export function CartItemsList({ items, totals, onUpdateQuantity, onRemoveItem }:
                   role="group"
                   aria-label={`Quantity of ${item.name}`}
                 >
-                  <button type="button" onClick={() => onUpdateQuantity(item.id, item.quantity - 1)} className="p-2 text-forest transition-colors hover:bg-sage/15" aria-label={`Decrease quantity of ${item.name}`}>
+                  <button type="button" onClick={() => onUpdateQuantity(item.id, item.quantity - (weightProduct ? WEIGHT_STEP_GRAMS : 1))} disabled={atMin} className="p-2 text-forest transition-colors hover:bg-sage/15 disabled:opacity-30" aria-label={`Decrease quantity of ${item.name}`}>
                     <Minus className="h-3.5 w-3.5" />
                   </button>
-                  <span className="w-8 text-center text-sm font-bold text-forest" aria-live="polite">{item.quantity}</span>
-                  <button type="button" onClick={() => onUpdateQuantity(item.id, item.quantity + 1)} disabled={item.quantity >= Math.min(item.stock, COMMERCE.maxQuantityPerItem)} className="p-2 text-forest transition-colors hover:bg-sage/15 disabled:opacity-30" aria-label={`Increase quantity of ${item.name}`}>
+                  <span className="min-w-[3.75rem] px-1 text-center text-sm font-bold text-forest" aria-live="polite">{weightProduct ? formatWeight(item.quantity) : item.quantity}</span>
+                  <button type="button" onClick={() => onUpdateQuantity(item.id, item.quantity + (weightProduct ? WEIGHT_STEP_GRAMS : 1))} disabled={item.quantity >= Math.min(item.stock, weightProduct ? item.stock : COMMERCE.maxQuantityPerItem)} className="p-2 text-forest transition-colors hover:bg-sage/15 disabled:opacity-30" aria-label={`Increase quantity of ${item.name}`}>
                     <Plus className="h-3.5 w-3.5" />
                   </button>
                 </div>
               </div>
 
               <div className="flex-shrink-0 text-right">
-                <p className="font-serif text-lg font-bold text-forest">{formatPrice(item.price * item.quantity)}</p>
+                <p className="font-serif text-lg font-bold text-forest">{formatPrice(weightProduct ? weightLineTotal(item.price, item.quantity) : item.price * item.quantity)}</p>
                 <button type="button" onClick={() => onRemoveItem(item.id)} className="mt-2 rounded-lg p-1.5 text-forest/30 transition-colors hover:bg-red-50 hover:text-red-500" aria-label={`Remove ${item.name}`}>
                   <Trash2 className="h-4 w-4" />
                 </button>
               </div>
             </motion.li>
-          ))}
+            );
+          })}
         </AnimatePresence>
       </ul>
     </div>

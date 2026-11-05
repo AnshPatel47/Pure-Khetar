@@ -10,7 +10,7 @@ const FALLBACK_PRODUCTS = [
     slug: 'f1',
     name: 'Natural Ringan (Eggplant)',
     description: 'Tender eggplants grown in net-house with careful natural farming practices. Zero pesticides.',
-    price: 60,
+    price: 75,
     unit: 'kg',
     stock: 0,
     images: ['/images/products/ringan.jpeg'],
@@ -20,7 +20,7 @@ const FALLBACK_PRODUCTS = [
     slug: 'f2',
     name: 'Natural Fulawar (Cauliflower)',
     description: 'Crisp, white cauliflower heads straight from Kamana net-house plots. Harvested at sunrise.',
-    price: 80,
+    price: 75,
     unit: 'kg',
     stock: 0,
     images: ['/images/products/fulawar.jpeg'],
@@ -112,8 +112,9 @@ export async function FeaturedHarvestSection() {
                 <div>
                   <span className="text-[10px] text-gray-400 uppercase font-medium">Price</span>
                   <p className="font-serif text-lg font-bold text-forest leading-none">
-                    ₹{product.price}
-                    <span className="text-xs font-normal text-gray-400 ml-1">/{product.unit}</span>
+                    {product.slug === 'natural-papaya' ? 'Coming soon' : (
+                      <>₹{product.price}<span className="text-xs font-normal text-gray-400 ml-1">/{product.unit}</span></>
+                    )}
                   </p>
                 </div>
                 <AddToCartButton

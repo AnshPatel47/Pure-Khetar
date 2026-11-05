@@ -6,11 +6,16 @@ import { Button } from '@/components/ui/Button';
 import { SmartImage } from '@/components/ui/SmartImage';
 import { FALLBACK_PRODUCT_IMAGE } from '@/lib/constants';
 import { formatDate, formatPrice } from '@/lib/utils';
+import { formatWeight, isWeightUnit, weightLineTotal } from '@/lib/weight';
 import type { OrderStatus, OrderSummary } from '@/types/order';
 import { PageHeader } from './PageHeader';
 
 const STATUS: Record<OrderStatus, { label: string; variant: 'soft' | 'natural' | 'forest' | 'danger' }> = {
   PENDING: { label: 'Order received', variant: 'natural' },
+  REQUESTED: { label: 'Request received — awaiting approval', variant: 'natural' },
+  APPROVED: { label: 'Approved — place payment or choose COD', variant: 'forest' },
+  PAYMENT_PENDING: { label: 'Payment pending', variant: 'natural' },
+  REJECTED: { label: 'Request not approved', variant: 'danger' },
   PROCESSING: { label: 'Being packed', variant: 'natural' },
   SHIPPED: { label: 'Out for delivery', variant: 'forest' },
   DELIVERED: { label: 'Delivered', variant: 'soft' },
@@ -93,10 +98,10 @@ export function AccountPage({ user, orders }: AccountPageProps) {
                           <div className="min-w-0 flex-1">
                             <p className="truncate text-sm font-semibold text-forest">{item.name}</p>
                             <p className="text-xs text-forest/55">
-                              {item.quantity} {item.unit} × {formatPrice(item.price)}
+                              {isWeightUnit(item.unit) ? formatWeight(Math.round(item.quantity * 1000)) : `${item.quantity} ${item.unit}`} × {formatPrice(item.price)}
                             </p>
                           </div>
-                          <p className="text-sm font-bold text-forest">{formatPrice(item.price * item.quantity)}</p>
+                          <p className="text-sm font-bold text-forest">{formatPrice(isWeightUnit(item.unit) ? weightLineTotal(item.price, Math.round(item.quantity * 1000)) : item.price * item.quantity)}</p>
                         </li>
                       ))}
                     </ul>

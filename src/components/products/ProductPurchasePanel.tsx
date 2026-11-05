@@ -6,14 +6,21 @@ import { AddToCartButton } from './AddToCartButton';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { COMMERCE, SITE } from '@/lib/constants';
 import { formatPrice } from '@/lib/utils';
+import { formatWeight, isWeightUnit, normalizeWeightQuantity, MIN_WEIGHT_GRAMS, WEIGHT_STEP_GRAMS } from '@/lib/weight';
 import type { ProductSummary } from '@/types/product';
 
 export function ProductPurchasePanel({ product }: { product: ProductSummary }) {
-  const max = Math.max(1, Math.min(product.stock, COMMERCE.maxQuantityPerItem));
-  const [quantity, setQuantity] = useState(1);
-  const soldOut = product.stock <= 0;
+  const weightProduct = isWeightUnit(product.unit);
+  const stockGrams = weightProduct ? Math.max(0, Math.round(product.stock * 1000)) : 0;
+  const max = weightProduct
+    ? stockGrams
+    : Math.max(1, Math.min(product.stock, COMMERCE.maxQuantityPerItem));
+  const [quantity, setQuantity] = useState(weightProduct ? Math.min(MIN_WEIGHT_GRAMS, max) : 1);
+  const soldOut = product.stock <= 0 || product.slug === 'natural-papaya';
 
-  const step = (delta: number) => setQuantity((q) => Math.min(max, Math.max(1, q + delta)));
+  const step = (delta: number) => setQuantity((q) => weightProduct
+    ? normalizeWeightQuantity(q + delta * WEIGHT_STEP_GRAMS, max)
+    : Math.min(max, Math.max(1, q + delta)));
 
   return (
     <div className="space-y-5">
@@ -23,14 +30,14 @@ export function ProductPurchasePanel({ product }: { product: ProductSummary }) {
             <button
               type="button"
               onClick={() => step(-1)}
-              disabled={quantity <= 1}
+              disabled={weightProduct ? quantity <= MIN_WEIGHT_GRAMS : quantity <= 1}
               aria-label="Decrease quantity"
               className="flex h-11 w-11 items-center justify-center rounded-full text-forest transition hover:bg-forest/5 disabled:opacity-40"
             >
               <Minus className="h-4 w-4" />
             </button>
-            <span className="w-10 text-center text-sm font-bold text-forest" aria-live="polite">
-              {quantity}
+            <span className="min-w-[4rem] px-1 text-center text-sm font-bold text-forest" aria-live="polite">
+              {weightProduct ? formatWeight(quantity) : quantity}
             </span>
             <button
               type="button"
@@ -44,7 +51,9 @@ export function ProductPurchasePanel({ product }: { product: ProductSummary }) {
           </div>
           <p className="text-sm text-forest/60">
             Total{' '}
-            <span className="font-serif text-xl font-bold text-forest">{formatPrice(product.price * quantity)}</span>
+            <span className="font-serif text-xl font-bold text-forest">
+              {formatPrice(weightProduct ? (product.price * quantity) / 1000 : product.price * quantity)}
+            </span>
           </p>
         </div>
       )}
@@ -54,7 +63,7 @@ export function ProductPurchasePanel({ product }: { product: ProductSummary }) {
         <WhatsAppButton
           size="lg"
           label="Order on WhatsApp"
-          message={`Hello ${SITE.name}! I would like to order ${quantity} ${product.unit} of ${product.name}.`}
+          message={`Hello ${SITE.name}! I would like to order ${weightProduct ? formatWeight(quantity) : `${quantity} ${product.unit}`} of ${product.name}.`}
         />
       </div>
     </div>

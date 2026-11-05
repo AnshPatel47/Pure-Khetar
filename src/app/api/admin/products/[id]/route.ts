@@ -1,0 +1,8 @@
+import { NextResponse } from 'next/server';
+import type { Prisma } from '@prisma/client';
+import { requireAdmin } from '@/lib/admin';
+import { prisma } from '@/lib/prisma';
+import { revalidateTag } from 'next/cache';
+import { PRODUCT_CACHE_TAG } from '@/services/product.service';
+export async function PATCH(request:Request,{params}:{params:{id:string}}){const session=await requireAdmin();if(!session)return NextResponse.json({error:'Unauthorized'},{status:401});const data=await request.json();const slug=String(data.slug??'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-');const update: Prisma.ProductUncheckedUpdateInput = { name: String(data.name), slug, price: Number(data.price), stock: Number(data.stock), categoryId: String(data.categoryId), available: Boolean(data.available), comingSoon: Boolean(data.comingSoon) };if(Array.isArray(data.images)&&data.images.length)update.images=data.images;if(!update.description&&data.description)update.description=String(data.description);const product=await prisma.product.update({where:{id:params.id},data:update});await prisma.adminAuditLog.create({data:{actorId:session.user.id,action:'PRODUCT_UPDATED',entity:'Product',entityId:product.id}});revalidateTag(PRODUCT_CACHE_TAG);return NextResponse.json(product)}
+export async function DELETE(_request:Request,{params}:{params:{id:string}}){const session=await requireAdmin();if(!session)return NextResponse.json({error:'Unauthorized'},{status:401});const product=await prisma.product.update({where:{id:params.id},data:{deletedAt:new Date(),available:false}});await prisma.adminAuditLog.create({data:{actorId:session.user.id,action:'PRODUCT_DELETED',entity:'Product',entityId:product.id}});revalidateTag(PRODUCT_CACHE_TAG);return NextResponse.json({ok:true})}

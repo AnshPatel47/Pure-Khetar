@@ -7,6 +7,7 @@ export const PRODUCT_CACHE_TAG = 'products';
 const REVALIDATE_SECONDS = 120;
 export const LIVE_PRODUCT_SLUGS = [
   'natural-ringan',
+  'natural-deti',
   'fresh-fulawar',
   'natural-papaya',
 ] as const;
@@ -22,6 +23,9 @@ const productSelect = {
   images: true,
   isChemicalFree: true,
   isFeatured: true,
+  available: true,
+  comingSoon: true,
+  deletedAt: true,
   category: { select: { name: true, slug: true } },
 } satisfies Prisma.ProductSelect;
 
@@ -40,7 +44,7 @@ function orderBy(sort: ProductQuery['sort']): Prisma.ProductOrderByWithRelationI
 
 function buildWhere({ category, q }: ProductQuery): Prisma.ProductWhereInput {
   return {
-    slug: { in: [...LIVE_PRODUCT_SLUGS] },
+    deletedAt: null,
     ...(category ? { category: { slug: category } } : {}),
     ...(q
       ? {
@@ -76,7 +80,7 @@ export const getFeaturedProducts = unstable_cache(
   async (limit = 4): Promise<ProductSummary[]> => {
     try {
       return await prisma.product.findMany({
-        where: { isFeatured: true, slug: { in: [...LIVE_PRODUCT_SLUGS] } },
+        where: { isFeatured: true, deletedAt: null },
         orderBy: { createdAt: 'desc' },
         take: limit,
         select: productSelect,
@@ -92,7 +96,6 @@ export const getFeaturedProducts = unstable_cache(
 
 export const getProductBySlug = unstable_cache(
   async (slug: string): Promise<ProductSummary | null> => {
-    if (!(LIVE_PRODUCT_SLUGS as readonly string[]).includes(slug)) return null;
     try {
       return await prisma.product.findUnique({ where: { slug }, select: productSelect });
     } catch (error) {
@@ -107,7 +110,7 @@ export const getProductBySlug = unstable_cache(
 export const getRelatedProducts = unstable_cache(
   async (productId: string, categorySlug: string, limit = 4): Promise<ProductSummary[]> =>
     prisma.product.findMany({
-      where: { id: { not: productId }, slug: { in: [...LIVE_PRODUCT_SLUGS] }, category: { slug: categorySlug } },
+      where: { id: { not: productId }, deletedAt: null, category: { slug: categorySlug } },
       orderBy: { createdAt: 'desc' },
       take: limit,
       select: productSelect,
@@ -128,5 +131,5 @@ export async function searchProducts(q: string, limit = 6): Promise<ProductSumma
 
 /** For sitemap.xml. */
 export async function getAllProductSlugs(): Promise<{ slug: string; updatedAt: Date }[]> {
-  return prisma.product.findMany({ where: { slug: { in: [...LIVE_PRODUCT_SLUGS] } }, select: { slug: true, updatedAt: true } });
+  return prisma.product.findMany({ where: { deletedAt: null }, select: { slug: true, updatedAt: true } });
 }

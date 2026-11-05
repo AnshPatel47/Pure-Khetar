@@ -33,7 +33,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
   if (!product) notFound();
 
   const related = await getRelatedProducts(product.id, product.category.slug, 4);
-  const soldOut = product.stock <= 0;
+  const comingSoon = product.slug === 'natural-papaya';
+  const soldOut = product.stock <= 0 || comingSoon;
 
   // Structured data so search engines can show price and availability.
   const jsonLd = {
@@ -85,15 +86,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div className="flex flex-wrap items-center gap-2">
               {product.isChemicalFree && <Badge variant="natural">Natural</Badge>}
               <Badge variant={soldOut ? 'danger' : 'soft'}>
-                {soldOut ? 'Sold out' : product.stock <= 10 ? `Only ${product.stock} left` : 'In stock'}
+                {comingSoon ? 'Coming soon' : soldOut ? 'Sold out' : product.stock <= 10 ? `Only ${product.stock} left` : 'In stock'}
               </Badge>
             </div>
 
             <div className="space-y-3">
               <h1 className="font-serif text-3xl font-bold leading-tight text-forest sm:text-4xl">{product.name}</h1>
               <p className="font-serif text-3xl font-bold text-terracotta">
-                {formatPrice(product.price)}
-                <span className="ml-1.5 text-base font-normal text-forest/50">per {product.unit}</span>
+                {comingSoon ? 'Coming soon' : (
+                  <>{formatPrice(product.price)}<span className="ml-1.5 text-base font-normal text-forest/50">per {product.unit}</span></>
+                )}
               </p>
             </div>
 

@@ -7,6 +7,7 @@ import { PageHero } from '@/components/pages/PageHero';
 import { parseProductQuery } from '@/lib/validations/product.schema';
 import { getCategories } from '@/services/category.service';
 import { getProducts } from '@/services/product.service';
+import { WeeklyBasket } from '@/components/home/WeeklyBasket';
 
 export const metadata: Metadata = {
   title: 'Shop fresh produce',
@@ -19,7 +20,11 @@ interface ShopPageProps {
 
 export default async function ShopPage({ searchParams = {} }: ShopPageProps) {
   const query = parseProductQuery(searchParams);
-  const [categories, products] = await Promise.all([getCategories(), getProducts(query)]);
+  const [categories, products, basketProducts] = await Promise.all([
+    getCategories(),
+    getProducts(query),
+    getProducts({ limit: 24 }),
+  ]);
 
   const totalCount = categories.reduce((sum, category) => sum + category.productCount, 0);
   const activeCategory = categories.find((category) => category.slug === query.category);
@@ -38,6 +43,8 @@ export default async function ShopPage({ searchParams = {} }: ShopPageProps) {
         <Suspense fallback={<div className="h-28 animate-pulse rounded-3xl bg-sage/10" aria-hidden />}>
           <ProductFilters categories={categories} totalCount={totalCount} />
         </Suspense>
+
+        <WeeklyBasket products={basketProducts} />
 
         <section aria-labelledby="results-heading" className="space-y-5">
           <h2 id="results-heading" className="text-sm font-semibold text-forest/60" aria-live="polite">

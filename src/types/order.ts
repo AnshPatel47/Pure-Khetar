@@ -1,4 +1,4 @@
-export type OrderStatus = 'PENDING' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
+export type OrderStatus = 'PENDING' | 'REQUESTED' | 'APPROVED' | 'PAYMENT_PENDING' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED' | 'REJECTED';
 export type PaymentMethod = 'COD' | 'UPI';
 
 export interface ShippingAddress {

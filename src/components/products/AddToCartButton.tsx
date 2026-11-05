@@ -21,10 +21,12 @@ export function AddToCartButton({ product, quantity = 1, size = 'sm', fullWidth,
 
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
-  if (product.stock <= 0) {
+  const comingSoon = product.slug === 'natural-papaya';
+
+  if (product.stock <= 0 || comingSoon) {
     return (
       <Button variant="outline" size={size} fullWidth={fullWidth} className={className} disabled>
-        Sold out
+        {comingSoon ? 'Coming soon' : 'Sold out'}
       </Button>
     );
   }

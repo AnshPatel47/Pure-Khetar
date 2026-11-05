@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { COMMERCE } from '@/lib/constants';
 import { indianPhone } from './auth.schema';
 
 export const DELIVERY_SLOTS = ['morning', 'noon', 'evening'] as const;
@@ -27,7 +26,7 @@ export const checkoutSchema = z.object({
     .array(
       z.object({
         productId: z.string().min(1),
-        quantity: z.number().int().min(1).max(COMMERCE.maxQuantityPerItem),
+        quantity: z.number().int().min(250).max(10_000_000).refine((value) => value % 250 === 0, 'Quantity must increase in 250 gram steps'),
       }),
     )
     .min(1, 'Your crate is empty')

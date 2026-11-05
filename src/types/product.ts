@@ -9,6 +9,8 @@ export interface ProductSummary {
   images: string[];
   isChemicalFree: boolean;
   isFeatured: boolean;
+  available?: boolean;
+  comingSoon?: boolean;
   category: { name: string; slug: string };
 }
 

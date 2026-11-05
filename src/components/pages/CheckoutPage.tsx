@@ -80,11 +80,14 @@ export default function CheckoutPage() {
         let removedCount = 0;
         for (const item of items) {
           const live = liveProducts.get(item.id);
-          if (!live || live.stock <= 0) {
+          const liveStockGrams = live
+            ? (item.unit.trim().toLowerCase() === 'kg' ? Math.round(live.stock * 1000) : live.stock)
+            : 0;
+          if (!live || liveStockGrams <= 0) {
             removeItem(item.id);
             removedCount += 1;
-          } else if (item.quantity > live.stock) {
-            updateQuantity(item.id, live.stock);
+          } else if (item.quantity > liveStockGrams) {
+            updateQuantity(item.id, liveStockGrams);
           }
         }
         if (removedCount > 0) {

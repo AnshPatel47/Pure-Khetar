@@ -28,10 +28,14 @@ enum PaymentStatus {
 
 enum OrderStatus {
   PENDING
+  REQUESTED
+  APPROVED
+  PAYMENT_PENDING
   PROCESSING
   SHIPPED
   DELIVERED
   CANCELLED
+  REJECTED
 }
 
 model User {
@@ -64,10 +68,14 @@ model Product {
   description String
   price       Float
   unit        String      @default("kg")
-  stock       Int         @default(0)
+  stock       Float       @default(0)
   images      String[]
   isChemicalFree   Boolean     @default(true)
   isFeatured  Boolean     @default(false)
+  available   Boolean     @default(true)
+  comingSoon  Boolean     @default(false)
+  deletedAt   DateTime?
+  imagePrompt String?
   categoryId  String
   category    Category    @relation(fields: [categoryId], references: [id])
   cartItems   CartItem[]
@@ -94,7 +102,7 @@ model CartItem {
   cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
   productId String
   product   Product @relation(fields: [productId], references: [id])
-  quantity  Int     @default(1)
+  quantity  Float   @default(1)
 }
 
 model Order {
@@ -105,6 +113,11 @@ model Order {
   deliveryFee Float       @default(0)
   totalAmount Float
   status      OrderStatus @default(PENDING)
+  orderNumber String      @unique
+  idempotencyKey String? @unique
+  approvedAt  DateTime?
+  rejectedAt  DateTime?
+  basketPlan  Json?
 
   paymentMethod   PaymentMethod @default(COD)
   deliverySlot    String?
@@ -124,7 +137,7 @@ model OrderItem {
   order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   productId String
   product   Product @relation(fields: [productId], references: [id])
-  quantity  Int
+  quantity  Float
   price     Float
 }
 
@@ -140,4 +153,38 @@ model PaymentIntent {
   completedAt DateTime?
 
   @@index([status, expiresAt])
+}
+
+enum ContactStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+  SPAM
+}
+
+model ContactSubmission {
+  id        String        @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  status    ContactStatus @default(NEW)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([status, createdAt])
+}
+
+model AdminAuditLog {
+  id        String   @id @default(cuid())
+  actorId   String
+  action    String
+  entity    String
+  entityId  String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([entity, createdAt])
+  @@index([actorId, createdAt])
 }

@@ -3,6 +3,7 @@
 import { useMemo, useSyncExternalStore } from 'react';
 import { useCartStore } from '@/store/cart.store';
 import { calculateTotals } from '@/lib/pricing';
+import { isWeightUnit, weightLineTotal } from '@/lib/weight';
 import type { CartItem } from '@/types/cart';
 
 const EMPTY_ITEMS: CartItem[] = [];
@@ -34,8 +35,14 @@ export function useCart() {
   const clearCart = useCartStore((s) => s.clearCart);
 
   const items = hydrated ? storedItems : EMPTY_ITEMS;
-  const count = useMemo(() => items.reduce((sum, item) => sum + item.quantity, 0), [items]);
-  const subtotal = useMemo(() => items.reduce((sum, item) => sum + item.price * item.quantity, 0), [items]);
+  const count = useMemo(() => items.length, [items]);
+  const subtotal = useMemo(
+    () => items.reduce(
+      (sum, item) => sum + (isWeightUnit(item.unit) ? weightLineTotal(item.price, item.quantity) : item.price * item.quantity),
+      0,
+    ),
+    [items],
+  );
   const totals = useMemo(() => calculateTotals(subtotal), [subtotal]);
 
   return {

@@ -27,7 +27,7 @@ export async function createOrder(userId: string, input: CheckoutInput): Promise
       async (tx) => {
         const products = await tx.product.findMany({
           where: { id: { in: [...quantities.keys()] } },
-          select: { id: true, name: true, price: true, stock: true },
+          select: { id: true, name: true, price: true, stock: true, unit: true },
         });
         const byId = new Map(products.map((product) => [product.id, product]));
 
@@ -37,15 +37,22 @@ export async function createOrder(userId: string, input: CheckoutInput): Promise
         for (const [productId, quantity] of quantities) {
           const product = byId.get(productId);
           if (!product) throw new OrderError('An item in your crate is no longer available.');
-          if (product.stock < quantity) {
+          const weightUnit = product.unit.trim().toLowerCase() === 'kg';
+          if (weightUnit && quantity % 250 !== 0) {
+            throw new OrderError(`${product.name} must be ordered in 250 gram steps.`);
+          }
+          const orderQuantity = weightUnit ? quantity / 1000 : quantity;
+          if (product.stock < orderQuantity) {
             throw new OrderError(
               product.stock === 0
                 ? `${product.name} is out of stock right now.`
-                : `Only ${product.stock} of ${product.name} left. Please reduce the quantity.`,
+                : weightUnit
+                  ? `Only ${product.stock} kg of ${product.name} is left. Please reduce the quantity.`
+                  : `Only ${product.stock} of ${product.name} left. Please reduce the quantity.`,
             );
           }
-          subtotal += product.price * quantity;
-          lines.push({ productId, quantity, price: product.price });
+          subtotal += product.price * orderQuantity;
+          lines.push({ productId, quantity: orderQuantity, price: product.price });
         }
 
         for (const line of lines) {
@@ -63,6 +70,8 @@ export async function createOrder(userId: string, input: CheckoutInput): Promise
 
         const order = await tx.order.create({
           data: {
+            orderNumber: `PK-${crypto.randomUUID().slice(0,8).toUpperCase()}`,
+            status: 'REQUESTED',
             userId,
             subtotal,
             deliveryFee: totals.deliveryFee,

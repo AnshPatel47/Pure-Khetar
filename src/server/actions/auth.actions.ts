@@ -15,7 +15,11 @@ const BCRYPT_ROUNDS = 12;
 
 /** Where to send the visitor after signing in (only ever a path on this site). */
 function redirectTarget(formData: FormData): string {
-  return safeRedirectPath(formData.get('callbackUrl'), '/account', [headers().get('host')]);
+  const callbackUrl = formData.get('callbackUrl');
+  const email = String(formData.get('email') ?? '').trim().toLowerCase();
+  const configuredAdminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  const defaultTarget = configuredAdminEmail && email === configuredAdminEmail ? '/admin' : '/account';
+  return safeRedirectPath(callbackUrl, defaultTarget, [headers().get('host')]);
 }
 
 export async function loginAction(_previous: FormState, formData: FormData): Promise<FormState> {

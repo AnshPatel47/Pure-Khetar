@@ -1,90 +1,59 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Leaf, Phone, Mail } from 'lucide-react';
+import { Leaf, Phone } from 'lucide-react';
 import { Reveal } from '@/components/ui/Reveal';
 import { TEAM } from '@/data/team';
 
 export function TeamCards() {
   return (
-    <section className="py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-16">
+    <section className="py-16 sm:py-20 lg:py-28" aria-labelledby="team-heading">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {TEAM.map((member, i) => (
-            <Reveal key={member.id} delay={i * 0.08}>
-              <div className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${i % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
-                {/* Photo / Avatar Card */}
-                <div className={i % 2 === 1 ? 'lg:col-start-2' : ''}>
-                  <div className="relative">
-                    <motion.div
-                      whileHover={{ y: -6 }}
-                      transition={{ duration: 0.35 }}
-                      className="relative bg-white rounded-4xl overflow-hidden shadow-natural-lg border border-sage/10"
-                    >
-                      <div className={`aspect-[4/3] bg-gradient-to-br ${member.accent} flex items-center justify-center relative`}>
-                        <div
-                          className="absolute inset-0 opacity-10"
-                          style={{
-                            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-                            backgroundSize: '20px 20px',
-                          }}
-                        />
-                        <span className="font-serif text-8xl font-bold text-white/30 select-none relative z-10">
-                          {member.name.split(' ').map(n => n[0]).join('')}
-                        </span>
-                        {member.since && (
-                          <div className="absolute top-4 left-4 glass border border-white/25 text-white px-3 py-1.5 rounded-full text-xs font-bold">
-                            Since {member.since}
-                          </div>
-                        )}
-                        <Leaf className="absolute bottom-4 right-4 w-12 h-12 text-white/20" />
-                      </div>
-                      <div className="p-5">
-                        <p className="font-serif text-lg font-bold text-forest">{member.name}</p>
-                        <p className="text-xs text-sage font-medium mt-0.5">{member.role}</p>
-                        <div className="flex flex-wrap gap-1.5 mt-3">
-                          {member.specialties.map((s) => (
-                            <span key={s} className="text-[10px] bg-cream border border-sage/20 text-forest/70 px-2 py-0.5 rounded-full font-medium">
-                              {s}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                    <div className={`absolute -top-3 -right-3 ${member.badgeColor} px-3 py-1.5 rounded-full text-[11px] font-bold shadow-card border border-white`}>
-                      {member.role_detail}
-                    </div>
-                  </div>
+            <Reveal key={member.id} delay={i * 0.07}>
+              <motion.article
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative h-full overflow-hidden rounded-[2rem] border border-sage/15 bg-white shadow-card transition-shadow hover:shadow-card-hover"
+              >
+                <div className={`relative aspect-[4/5] overflow-hidden bg-gradient-to-br ${member.accent}`}>
+                  <div className="absolute inset-0 opacity-15" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '18px 18px' }} />
+                  <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-forest/50 to-transparent" />
+                  <span className="absolute inset-0 flex items-center justify-center font-serif text-7xl font-bold text-white/35 transition-transform duration-700 group-hover:scale-105">
+                    {member.name.split(/\s+/).map((part) => part[0]).join('').slice(0, 3)}
+                  </span>
+                  <Leaf className="absolute bottom-4 right-4 h-10 w-10 text-white/25" aria-hidden />
+                  {member.since && (
+                    <span className="absolute left-4 top-4 rounded-full border border-white/30 bg-white/15 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-md">
+                      Since {member.since}
+                    </span>
+                  )}
+                  <span className={`absolute bottom-4 left-4 rounded-full px-3 py-1.5 text-[11px] font-bold shadow-card ${member.badgeColor}`}>
+                    {member.role_detail}
+                  </span>
                 </div>
 
-                {/* Bio Content */}
-                <div className={i % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
-                  <blockquote className="font-serif text-lg italic text-forest/70 mb-6 border-l-4 border-marigold pl-5 leading-relaxed">
+                <div className="flex h-full flex-col p-5 sm:p-6">
+                  <h2 id={i === 0 ? 'team-heading' : undefined} className="font-serif text-xl font-bold text-forest">{member.name}</h2>
+                  <p className="mt-1 text-xs font-bold uppercase tracking-wide text-terracotta">{member.role}</p>
+                  <blockquote className="mt-4 border-l-2 border-marigold pl-3 text-sm italic leading-relaxed text-forest/70">
                     {member.tagline}
                   </blockquote>
-                  <h2 className="font-serif text-3xl font-bold text-forest mb-2">{member.name}</h2>
-                  <p className="text-sm font-semibold text-terracotta uppercase tracking-wide mb-5">{member.role}</p>
-                  <p className="text-gray-600 leading-relaxed text-base">{member.bio}</p>
-                  <div className="mt-6 flex items-center gap-3">
-                    <a
-                      href="https://wa.me/919876543210"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-xs font-semibold text-whatsapp-dk bg-whatsapp/10 border border-whatsapp/30 px-4 py-2.5 rounded-full hover:bg-whatsapp/20 transition-colors"
-                    >
-                      <Phone className="w-3.5 h-3.5" />
-                      WhatsApp
-                    </a>
-                    <a
-                      href="mailto:pureKhetar@gmail.com"
-                      className="flex items-center gap-1.5 text-xs font-semibold text-forest/70 bg-forest/5 border border-forest/15 px-4 py-2.5 rounded-full hover:bg-forest/10 transition-colors"
-                    >
-                      <Mail className="w-3.5 h-3.5" />
-                      Email Us
-                    </a>
-                  </div>
+                  <p className="mt-4 line-clamp-4 flex-1 text-sm leading-relaxed text-forest/60">{member.bio}</p>
+
+                  {member.phone && (
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      <a href={`tel:+91${member.phone}`} className="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-full border border-forest/15 bg-forest/5 px-3 text-xs font-bold text-forest transition-colors hover:bg-forest hover:text-white">
+                        <Phone className="h-3.5 w-3.5" aria-hidden /> Call
+                      </a>
+                      <a href={`https://wa.me/91${member.phone}`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-full border border-whatsapp/30 bg-whatsapp/10 px-3 text-xs font-bold text-whatsapp-dk transition-colors hover:bg-whatsapp/20">
+                        WhatsApp
+                      </a>
+                    </div>
+                  )}
                 </div>
-              </div>
+              </motion.article>
             </Reveal>
           ))}
         </div>

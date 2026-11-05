@@ -16,6 +16,6 @@ export function toCartItem(product: PurchasableProduct): CartItemInput {
     price: product.price,
     unit: product.unit,
     image: product.images[0] ?? FALLBACK_PRODUCT_IMAGE,
-    stock: product.stock,
+    stock: product.unit.trim().toLowerCase() === 'kg' ? Math.round(product.stock * 1000) : product.stock,
   };
 }
